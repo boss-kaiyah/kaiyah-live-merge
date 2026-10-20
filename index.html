@@ -1,0 +1,60 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BOSS KAIYAH V8 WEBSITE - 8X TOTOONG LIVE</title>
+<style>
+body{background:#000;color:#fff;font-family:Arial;padding:8px;margin:0}
+.box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin:10px 0}
+.label{color:#FFD700;font-weight:bold;font-size:13px;display:block;margin:8px 0 4px}
+input,select{width:100%;background:#222;color:#fff;padding:10px;border-radius:8px;border:1px solid #444}
+.list{max-height:150px;overflow:auto;background:#000;padding:8px;border-radius:8px;font-size:12px;border:1px solid #333}
+video{width:100%;background:#000;border:2px solid #FFD700;border-radius:10px;min-height:200px}
+.btn{border:none;padding:14px;border-radius:25px;font-weight:bold;flex:1;margin:5px 2px}
+.btn-yellow{background:#FFD700;color:#000}
+.btn-green{background:#00FF88;color:#000;padding:14px;border-radius:25px;font-weight:bold;width:100%;margin-top:8px}
+.btn-dark{background:#222;color:#FFD700;border:1px solid #FFD700;padding:12px;width:100%;margin-top:8px;border-radius:20px;font-weight:bold}
+.small{font-size:11px;color:#aaa}.progress{height:14px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.bar{height:100%;width:0%;background:#FFD700}
+.row{display:flex;gap:8px}.badge{background:#00FF88;color:#000;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold}
+</style>
+</head><body>
+<h1 style="color:#FFD700;text-align:center">✂️ BOSS KAIYAH V8 <span class="badge">WEBSITE HTTPS</span></h1>
+<div class="small" style="text-align:center;color:#00FF88">✅ https:// website - WakeLock ON + Download WORKING + 8X FAST!</div>
+<div class="box">
+<span class="label">1️⃣ VIDEO FILES - 10 files 89:11</span>
+<input type="file" id="videos" accept="video/*" multiple>
+<div id="vList" class="list">Piliin mo 10 files - lalabas dito - pag website na, mas mabilis!</div>
+<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | Mode: Website HTTPS - All ON!</div>
+<span class="label">⚡ SPEED</span><select id="speed"><option value="8" selected>8x ULTRA FAST 89:11=11mins - 3.8mins actual</option><option value="12">12x TURBO 89:11=7mins</option></select>
+<span class="label">2️⃣ OUTPUT</span><select id="res"><option value="1280x720" selected>720p HD 1280x720 - pang-CameraFi</option></select>
+</div>
+<div class="box">
+<video id="prev" controls playsinline></video>
+<div class="small" id="statusLine">Ready - Website HTTPS - WakeLock + Download working!</div>
+<div class="progress"><div class="bar" id="bar"></div></div><div class="small" id="mergeInfo">Website mode: WakeLock working + Download working + Background ON!</div>
+</div>
+<div class="box">
+<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn">🔗 MERGE TO 2HRS 8X</button></div>
+<div id="dlArea" style="display:none;"><button class="btn-green" id="dlBtn">💾 DOWNLOAD 2HRS - WORKING ON WEBSITE!</button></div>
+<button class="btn-dark" id="wakeBtn">🔒 KEEP SCREEN ON - Working on HTTPS!</button>
+</div>
+<script>
+let files=[],durs=[],total=0,wakeLock=null,merging=false,startTime=0,lastBlobUrl=null,lastBlob=null;
+const prev=document.getElementById('prev'),vList=document.getElementById('vList'),totalInfo=document.getElementById('totalInfo'),statusLine=document.getElementById('statusLine'),bar=document.getElementById('bar'),mergeInfo=document.getElementById('mergeInfo');
+function fmt(s){if(isNaN(s)||s<=0)return '00:00';const m=Math.floor(s/60),sc=Math.floor(s%60);return String(m).padStart(2,'0')+':'+String(sc).padStart(2,'0');}
+function getDur(f){return new Promise(r=>{const v=document.createElement('video');v.preload='metadata';v.muted=true;let done=false;const to=setTimeout(()=>{if(!done){done=true;r(0);}},3000);v.onloadedmetadata=()=>{if(!done){done=true;clearTimeout(to);r(v.duration);URL.revokeObjectURL(v.src);}};v.onerror=()=>{if(!done){done=true;clearTimeout(to);r(0);}};try{v.src=URL.createObjectURL(f);}catch(e){r(0);}});}
+async function requestWakeLock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');}}catch(e){}}
+document.getElementById('wakeBtn').onclick=requestWakeLock;
+document.getElementById('videos').onchange=async e=>{files=Array.from(e.target.files);durs=[];total=0;vList.innerHTML='';for(let i=0;i<files.length;i++){vList.innerHTML+=`${i+1}. ${files[i].name}<br>`;}for(let i=0;i<files.length;i++){const d=await getDur(files[i]);durs.push(d||0);total+=d||0;}totalInfo.textContent=`Total: ${fmt(total)} | Files: ${files.length} | Website HTTPS`;if(files[0]){try{prev.src=URL.createObjectURL(files[0]);}catch(e){}}};
+let rec,chunks=[],canvas,ctx;
+document.getElementById('mergeBtn').onclick=async()=>{
+ if(files.length===0)return alert('Pili ka muna!');if(merging)return;merging=true;chunks=[];startTime=Date.now();
+ const W=1280,H=720;const speed=8;await requestWakeLock();
+ canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;ctx=canvas.getContext('2d',{alpha:false});
+ const cStream=canvas.captureStream(24);let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';
+ rec=new MediaRecorder(cStream,{mimeType:mime,videoBitsPerSecond:1400000});rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+ rec.onstop=()=>{lastBlob=new Blob(chunks,{type:mime});lastBlobUrl=URL.createObjectURL(lastBlob);prev.src=lastBlobUrl;prev.muted=false;prev.play();document.getElementById('dlArea').style.display='block';merging=false;const elapsed=((Date.now()-startTime)/1000/60).toFixed(1);statusLine.textContent=`DONE! ${elapsed} mins! ${(lastBlob.size/1024/1024).toFixed(1)}MB`;bar.style.width='100%';alert(`DONE BOSS! ${elapsed} mins!`);};
+ rec.start(1000);let gTime=0,idx=0;let curV=document.createElement('video');curV.muted=true;curV.playsInline=true;curV.playbackRate=speed;
+ async function playNext(){if(idx>=files.length){rec.stop();return;}curV.src=URL.createObjectURL(files[idx]);curV.playbackRate=speed;try{await curV.play();}catch(e){gTime+=durs[idx]||0;idx++;playNext();return;}let drawInterval=setInterval(()=>{if(curV.paused||curV.ended)return;const now=gTime+curV.currentTime;try{ctx.drawImage(curV,0,0,W,H);}catch(e){}const prog=(now/total)*100;bar.style.width=Math.min(100,prog)+'%';const elapsed=(Date.now()-startTime)/1000;const est=total/speed;const rem=Math.max(0,est-elapsed);mergeInfo.textContent=`Merging ${idx+1}/${files.length} ${fmt(now)}/${fmt(total)} ${prog.toFixed(1)}% | ETA: ${fmt(rem)} | ${speed}x`;},1000/24);curV.onended=()=>{clearInterval(drawInterval);gTime+=durs[idx]||curV.duration||0;idx++;playNext();};curV.onerror=()=>{clearInterval(drawInterval);gTime+=durs[idx]||0;idx++;playNext();};}playNext();
+};
+document.getElementById('dlBtn').onclick=()=>{if(!lastBlobUrl)return alert('Wala pa!');const a=document.createElement('a');a.href=lastBlobUrl;a.download=`BOSS_8X_TOTOONG_LIVE_${Date.now()}.webm`;document.body.appendChild(a);a.click();document.body.removeChild(a);};
+document.getElementById('prevBtn').onclick=()=>{if(files.length===0)return alert('Pili ka muna!');let idx=0;prev.src=URL.createObjectURL(files[0]);prev.muted=false;prev.play();prev.onended=()=>{idx++;if(idx<files.length){prev.src=URL.createObjectURL(files[idx]);prev.play();}}};
+</script>
+</body></html>
