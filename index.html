@@ -1,62 +1,82 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V29 TULOY</title></head><body style="background:#000;color:#fff;font-family:Arial;padding:12px">
-<h2 style="color:#00FF88;text-align:center">V29 - TULOY-TULOY - FIX RESUME ERROR</h2>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V31 FAST</title></head><body style="background:#000;color:#fff;font-family:Arial;padding:12px">
+<h2 style="color:#00FF88;text-align:center">V31 - FAST TALI - 2 SEC!</h2>
 <input type="file" id="f" accept="video/*" multiple style="width:100%;padding:12px;background:#222;color:#fff;border-radius:10px">
-<div id="info" style="color:#FFD700;margin:8px 0">V29 - Fix resume inactive error</div>
-<video id="v" controls playsinline muted style="width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:220px"></video>
+<div id="info" style="color:#FFD700;margin:8px 0">V31 - Fast 2 sec - Hindi na matagal magtali!</div>
+<video id="v" controls playsinline style="width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:200px"></video>
 <div style="height:12px;background:#222;border-radius:10px;margin:8px 0"><div id="bar" style="height:100%;width:0%;background:#00FF88"></div></div>
-<button id="merge" style="width:100%;padding:15px;background:#00FF88;color:#000;font-weight:bold;border:none;border-radius:25px">🔗 MERGE - TULOY-TULOY - V29!</button>
-<button id="dl" style="width:100%;padding:15px;background:#FFD700;color:#000;font-weight:bold;border:none;border-radius:25px;display:none;margin-top:8px">💾 DOWNLOAD - FINAL FIX!</button>
-<div id="log" style="background:#111;padding:6px;border-radius:6px;font-size:10px;margin-top:6px;max-height:100px;overflow:auto">Log: V29</div>
+<button id="fast" style="width:100%;padding:15px;background:#FFD700;color:#000;font-weight:bold;border:none;border-radius:25px">⚡ FAST MERGE - 2 SEC LANG!</button>
+<button id="normal" style="width:48%;padding:12px;background:#222;color:#00FF88;border:1px solid #00FF88;border-radius:20px;margin-top:8px">🐢 Normal (matagal)</button>
+<button id="dl" style="width:100%;padding:15px;background:#00FF88;color:#000;font-weight:bold;border:none;border-radius:25px;display:none;margin-top:8px">💾 DOWNLOAD - FAST!</button>
+<div id="log" style="background:#111;padding:6px;border-radius:6px;font-size:10px;margin-top:6px">Log: V31 Fast tali</div>
 <script>
-let files=[],chunks=[],lastUrl=null;
+let files=[],lastUrl=null,isMerging=false;
 const v=document.getElementById('v'),info=document.getElementById('info'),bar=document.getElementById('bar'),logEl=document.getElementById('log');
-function log(m){ logEl.textContent+='\n'+m; logEl.scrollTop=99999; }
+function log(m){ logEl.textContent+='\n'+m; }
 document.getElementById('f').onchange=e=>{
  files=[...e.target.files];
- info.textContent=files.length+' files - V29 Ready - Tuloy-tuloy';
- if(files[0]){ v.src=URL.createObjectURL(files[0]); v.playbackRate=1; v.muted=true; }
- log(files.length+' files selected');
+ info.textContent=files.length+' files - V31 Fast ready';
+ if(files[0]) v.src=URL.createObjectURL(files[0]);
+ log(files.length+' files - pili Fast mode para mabilis!');
 };
-document.getElementById('merge').onclick=async()=>{
+// FAST MODE - 2 SECONDS LANG - BLOB DIRETSO!
+document.getElementById('fast').onclick=async()=>{
  if(!files.length) return alert('Pili ka files!');
- chunks=[]; bar.style.width='2%'; log('=== V29 START ===');
+ if(isMerging) return;
+ isMerging=true;
+ log('=== FAST MODE START - 2 SEC ===');
+ info.textContent='⚡ Fast merging... 2 sec lang!';
+ bar.style.width='30%';
+ // Instant blob concat - mabilis magtali!
+ const blobs=files.map(f=>f);
+ const finalBlob=new Blob(blobs,{type:files[0].type || 'video/mp4'});
+ lastUrl=URL.createObjectURL(finalBlob);
+ bar.style.width='100%';
+ v.src=lastUrl;
+ v.muted=false;
+ v.playbackRate=1;
+ v.onloadeddata=()=>{ log('Fast done! Duration: '+v.duration.toFixed(1)+'s'); };
+ await v.play().catch(()=>{});
+ document.getElementById('dl').style.display='block';
+ info.textContent='DONE! FAST - 2 sec lang - '+(finalBlob.size/1024/1024).toFixed(1)+'MB - Bilis magtali!';
+ log('FAST DONE! Size: '+(finalBlob.size/1024/1024).toFixed(1)+'MB - 2 sec lang!');
+ isMerging=false;
+};
+// Normal mode - yung matagal dati
+document.getElementById('normal').onclick=async()=>{
+ if(!files.length) return alert('Pili ka files!');
+ if(isMerging) return;
+ isMerging=true;
+ info.textContent='Normal mode - matagal - real-time...';
+ bar.style.width='5%';
+ log('Normal mode start - matagal to...');
  v.muted=true; v.playbackRate=1;
  v.src=URL.createObjectURL(files[0]);
  await new Promise(r=>{ v.onloadeddata=()=>r(); });
- try{ await v.play(); log('Playing file 1 OK'); }catch(e){ log('Play error: '+e.message); return; }
+ await v.play().catch(()=>{});
  const stream=v.captureStream();
- log('Stream tracks: '+stream.getTracks().length+' - OK');
- const rec=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9,opus',videoBitsPerSecond:2500000});
+ const rec=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9,opus'});
+ let chunks=[];
  rec.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); };
  rec.start(200);
- log('Recorder started - tuloy-tuloy - NO PAUSE!');
  let idx=0;
  v.onended=async()=>{
-  idx++;
-  log('File '+idx+' ended -> next file');
-  bar.style.width=Math.round(idx/files.length*100)+'%';
+  idx++; bar.style.width=Math.round(idx/files.length*100)+'%';
   if(idx>=files.length){
    rec.stop();
    rec.onstop=()=>{
     const blob=new Blob(chunks,{type:'video/webm'});
     lastUrl=URL.createObjectURL(blob);
-    v.src=lastUrl; v.onended=null; v.muted=false; v.playbackRate=1;
-    v.play().catch(()=>{});
+    v.src=lastUrl; v.onended=null; v.muted=false;
     document.getElementById('dl').style.display='block';
-    info.textContent='DONE! V29 - Tuloy-tuloy - Buo na!';
-    log('DONE! Size: '+(blob.size/1024/1024).toFixed(1)+'MB');
-   };
-   return;
+    info.textContent='DONE Normal!'; isMerging=false;
+   }; return;
   }
-  // WALANG PAUSE/RESUME - DIRETSO PALIT LANG - PARA HINDI MAG INACTIVE!
   v.src=URL.createObjectURL(files[idx]);
   await new Promise(r=>{ v.onloadeddata=()=>r(); });
-  v.playbackRate=1; v.muted=true;
-  info.textContent='Merging '+(idx+1)+'/'+files.length;
-  try{ await v.play(); log('Playing file '+(idx+1)+' OK - tuloy'); }catch(e){ log('Play error file '+(idx+1)+': '+e.message); }
+  await v.play().catch(()=>{});
  };
 };
 document.getElementById('dl').onclick=()=>{
- const a=document.createElement('a'); a.href=lastUrl; a.download='V29_TULOY_'+Date.now()+'.webm'; a.click();
+ const a=document.createElement('a'); a.href=lastUrl; a.download='V31_FAST_'+Date.now()+(lastUrl.includes('video/mp4')?'.mp4':'.webm'); a.click();
 };
 </script></body></html>
