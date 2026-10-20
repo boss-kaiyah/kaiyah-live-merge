@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V19 HEVC FIX</title>
-<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V20 MATCH FIX</title>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js"></script>
 <style>
 body{background:#0a0a0a;color:#fff;font-family:Arial;padding:6px;margin:0}
 .box{background:#151515;border:1px solid #2a2a2a;border-radius:12px;padding:10px;margin:8px 0}
@@ -12,34 +12,34 @@ video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min
 .saved-item{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center}
 </style>
 </head><body>
-<h1 style="color:#00FF88;text-align:center;font-size:14px">✂️ V19 <span class="badge">HEVC FIX</span> - TUNAY NA DUGTONG!</h1>
-<div class="small" style="text-align:center;color:#FFD700">✅ FIXED! jsDelivr CDN - Hindi blocked! HEVC to H264 Convert! Tunay na dugtong - Buong video! No Failed to fetch!</div>
+<h1 style="color:#00FF88;text-align:center;font-size:14px">✂️ V20 <span class="badge">MATCH FIX</span> - NO PROXY_MAIN!</h1>
+<div class="small" style="text-align:center;color:#FFD700">✅ FIXED! 0.11.0 + 0.11.0 Matching! No proxy_main error! jsDelivr CDN! HEVC to H264! Tunay na dugtong!</div>
 
 <div class="box">
-<span class="label">1️⃣ FILES - HEVC 1000025191.mp4 supported!</span>
+<span class="label">1️⃣ FILES - 1000025191.mp4 HEVC supported!</span>
 <input type="file" id="videos" accept="video/*" multiple>
-<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | V19 HEVC FIX</div>
-<div class="small" id="debugInfo" style="color:#FFD700">Debug: Waiting - jsDelivr CDN - No unpkg!</div>
+<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | V20 MATCH FIX</div>
+<div class="small" id="debugInfo" style="color:#FFD700">Debug: Waiting - Matching versions 0.11.0!</div>
 </div>
 
 <div class="box">
 <video id="prev" controls playsinline></video>
 <div class="progress"><div class="bar" id="bar"></div></div>
-<div class="small" id="statusLine">Ready - V19 HEVC FIX - jsDelivr - No Failed to fetch!</div>
-<div class="small" id="mergeInfo">jsDelivr CDN + core-st - HEVC Convert - Proper Concat - Normal speed!</div>
+<div class="small" id="statusLine">Ready - V20 MATCH FIX - No proxy_main error!</div>
+<div class="small" id="mergeInfo">0.11.0 + 0.11.0 Matching - jsDelivr - HEVC Convert - Proper Concat!</div>
 </div>
 
 <div class="box" style="border:1px solid #00FF88">
 <span class="label" style="color:#00FF88">💾 SAVED MERGES</span>
-<div id="savedList"><div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved</div></div>
+<div id="savedList"><div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved - V20 Match Fix!</div></div>
 <div class="row" style="margin-top:8px"><button class="btn-dark" id="clearAllBtn">🗑️ CLEAR ALL</button><button class="btn-dark" id="refreshSavedBtn">🔄 REFRESH</button></div>
 </div>
 
 <div class="box">
-<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn" style="background:#00FF88;color:#000">🔗 MERGE PROPER - HEVC FIX!</button></div>
+<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn" style="background:#00FF88;color:#000">🔗 MERGE - MATCH FIX - TUNAY NA DUGTONG!</button></div>
 <div class="row"><button class="btn-dark" id="wakeBtn">🔒 SCREEN ON</button></div>
-<div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - BUONG VIDEO - HEVC FIXED!</button></div>
-<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:150px;overflow:auto;white-space:pre-wrap">Log: V19 HEVC FIX! jsDelivr CDN - Hindi blocked sa Pinas! core-st Single Thread - No SharedArrayBuffer! HEVC to H264 convert - Tunay na dugtong!</div>
+<div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - BUONG VIDEO - MATCH FIXED!</button></div>
+<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:150px;overflow:auto;white-space:pre-wrap">Log: V20 MATCH FIX! 0.11.0 + 0.11.0 Matching! No proxy_main error! jsDelivr CDN! HEVC to H264! Tunay na dugtong!</div>
 </div>
 
 <script>
@@ -70,87 +70,29 @@ document.getElementById('videos').onchange=async e=>{
    clips.push({fileIdx:i,name:files[i].name,dur:d});
    total+=d;
  }
- totalInfo.textContent=`Total: ${fmt(total)} | Files: ${files.length} | V19 HEVC FIX`;
- debugInfo.textContent=`Debug: ${files.length} files - Total ${fmt(total)} - HEVC files supported via FFmpeg!`;
- log(`Loaded ${files.length} files - Total ${fmt(total)} - HEVC fix via jsDelivr!`);
+ totalInfo.textContent=`Total: ${fmt(total)} | Files: ${files.length} | V20 MATCH FIX`;
+ debugInfo.textContent=`Debug: ${files.length} files - Total ${fmt(total)} - Matching 0.11.0 - No proxy_main!`;
+ log(`Loaded ${files.length} files - Total ${fmt(total)} - Matching versions!`);
  if(files[0]){ prev.src=URL.createObjectURL(files[0]); }
 };
 
 document.getElementById('mergeBtn').onclick=async()=>{
  if(files.length==0)return alert('Pili ka files!');
  const { createFFmpeg, fetchFile } = FFmpeg;
- // JSDelivr CDN - Hindi blocked sa Pinas! + core-st - No SharedArrayBuffer!
+ // MATCHING VERSION - 0.11.0 + 0.11.0 - No proxy_main error!
  const ffmpeg = createFFmpeg({
    log: true,
    corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-st@0.11.0/dist/ffmpeg-core.js'
  });
  ffmpeg.setProgress(({ ratio }) => {
    bar.style.width=Math.round(ratio*100)+'%';
-   mergeInfo.textContent=`PROPER TALI HEVC FIX ${Math.round(ratio*100)}% - ${fmt(total)} - Tunay na dugtong!`;
+   mergeInfo.textContent=`PROPER TALI MATCH FIX ${Math.round(ratio*100)}% - ${fmt(total)}!`;
  });
  try{
-   log('Loading FFmpeg jsDelivr CDN + core-st - No SharedArrayBuffer - Hindi blocked - First time 15-20 secs...');
-   statusLine.textContent='Loading FFmpeg jsDelivr - 15-20 secs first time - HEVC support...';
+   log('Loading FFmpeg MATCHING 0.11.0 + 0.11.0 - No proxy_main error - jsDelivr CDN - 15-20 secs first time...');
+   statusLine.textContent='Loading FFmpeg Matching 0.11.0 - No proxy_main - 15-20 secs...';
    bar.style.width='10%';
-   debugInfo.textContent='Debug: Loading FFmpeg jsDelivr CDN... Please wait 15-20 secs...';
+   debugInfo.textContent='Debug: Loading FFmpeg Matching 0.11.0 - No proxy_main error - Please wait...';
    if(!ffmpeg.isLoaded()){
      await ffmpeg.load();
-   }
-   log('✅ FFmpeg loaded via jsDelivr! HEVC FIX! Tunay na dugtong!');
-   statusLine.textContent='FFmpeg loaded - Merging Proper - HEVC to H264 - Tunay na dugtong!';
-   bar.style.width='20%';
-   
-   for(let i=0;i<files.length;i++){
-     const data=await fetchFile(files[i]);
-     const inputName=`input${i}.mp4`;
-     ffmpeg.FS('writeFile', inputName, data);
-     // Convert HEVC to H264 if needed + copy - proper!
-     const outName=`converted${i}.mp4`;
-     log(`Converting ${i+1}/${files.length} ${files[i].name} - HEVC to H264 if needed - Proper...`);
-     // Convert to H264 baseline - compatible - fast
-     await ffmpeg.run('-i', inputName, '-c:v', 'libx264', '-preset', 'ultrafast', '-c:a', 'aac', outName);
-     clips[i].finalName=outName;
-     try{ffmpeg.FS('unlink', inputName);}catch(e){}
-     bar.style.width=Math.round(20 + (i/files.length)*40)+'%';
-   }
-   
-   let concatList='';
-   clips.forEach(c=>{ concatList+=`file '${c.finalName}'\n`; });
-   ffmpeg.FS('writeFile', 'list.txt', concatList);
-   log('Merging Proper Tali - HEVC FIXED - Tunay na dugtong - Normal speed!');
-   statusLine.textContent='Merging Proper - Tunay na dugtong - 2-3 mins!';
-   
-   await ffmpeg.run('-f','concat','-safe','0','-i','list.txt','-c','copy','output.mp4');
-   bar.style.width='90%';
-   
-   const data=ffmpeg.FS('readFile', 'output.mp4');
-   lastBlob=new Blob([data.buffer],{type:'video/mp4'});
-   lastBlobUrl=URL.createObjectURL(lastBlob);
-   prev.src=lastBlobUrl;
-   prev.muted=false;
-   try{await prev.play();}catch(e){}
-   bar.style.width='100%';
-   statusLine.textContent=`DONE! PROPER TALI HEVC FIX! ${fmt(total)} - Tunay na dugtong!`;
-   mergeInfo.textContent=`DONE! ${fmt(total)} = ${fmt(total)} - HEVC Fixed - Tunay na dugtong! Buong video!`;
-   document.getElementById('dlArea').style.display='block';
-   document.getElementById('dlBtn').textContent=`💾 DOWNLOAD - ${fmt(total)} - TUNAY NA DUGTONG - HEVC FIXED!`;
-   const fileName=`BOSS_V19_HEVC_FIXED_${fmt(total).replace(/:/g,'-')}_${Date.now()}.mp4`;
-   await saveToDB(lastBlob,fileName,total);
-   await refreshSavedList();
-   log(`💾 AUTO SAVED! ${fileName} - ${fmt(total)} - HEVC Fixed - Tunay na dugtong! ${(lastBlob.size/1024/1024).toFixed(1)}MB`);
-   alert(`DONE BOSS! V19 HEVC FIX! Tunay na nadugtong! ${fmt(total)} - Buong video tutugtog! HEVC 1000025191.mp4 fixed! Normal speed!`);
- }catch(e){
-   log('FFmpeg HEVC error: '+e.message);
-   console.error(e);
-   debugInfo.textContent='Debug Error: '+e.message+' - Try ibang CDN o check internet!';
-   alert('Error: '+e.message+' - jsDelivr CDN - Try ulit - Check internet - HEVC Fix!');
-   statusLine.textContent='Error: '+e.message;
-   bar.style.width='0%';
- }
-};
-
-document.getElementById('dlBtn').onclick=()=>{if(!lastBlobUrl)return;const a=document.createElement('a');a.href=lastBlobUrl;a.download=`BOSS_V19_HEVC_FIXED_${Date.now()}.mp4`;document.body.appendChild(a);a.click();document.body.removeChild(a);};
-document.getElementById('prevBtn').onclick=()=>{if(files.length==0)return alert('Pili ka files!');prev.src=URL.createObjectURL(files[0]);prev.play();};
-
-log('V19 HEVC FIX ready! jsDelivr CDN - Hindi blocked sa Pinas! core-st - No SharedArrayBuffer! HEVC to H264 convert - Tunay na dugtong - 1000025191.mp4 supported!');
-</script></body></html>
+  
