@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V13.1 FAST TALI FIXED</title>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V13.2 BLOB FIX</title>
 <style>
 body{background:#0a0a0a;color:#fff;font-family:Arial;padding:6px;margin:0}
 .box{background:#151515;border:1px solid #2a2a2a;border-radius:12px;padding:10px;margin:8px 0}
@@ -16,13 +16,13 @@ video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min
 .capcut-btn{background:#2a2a2a;color:#fff;border:1px solid #444;padding:8px 12px;border-radius:18px;font-size:11px;font-weight:bold;white-space:nowrap}
 </style>
 </head><body>
-<h1 style="color:#00FF88;text-align:center;font-size:14px">✂️ V13.1 <span class="badge">FAST TALI FIXED</span></h1>
-<div class="small" style="text-align:center;color:#FFD700">✅ FIXED! FFmpeg working na! Mabilis merge 2-3 mins! Normal speed result! May internet ka - gagana na!</div>
+<h1 style="color:#00FF88;text-align:center;font-size:14px">✂️ V13.2 <span class="badge">BLOB FIX</span> - GITHUB PAGES FIX!</h1>
+<div class="small" style="text-align:center;color:#FFD700">✅ FIXED! GitHub Pages CORS Fix! Blob Worker! Gagana na sa boss-kaiyah.github.io!</div>
 
 <div class="box">
-<span class="label">1️⃣ FILES - 13 files 117:36</span>
+<span class="label">1️⃣ FILES</span>
 <input type="file" id="videos" accept="video/*" multiple>
-<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | V13.1 FIXED - FFmpeg Fixed!</div>
+<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | V13.2 BLOB FIX</div>
 <div class="capcut-bar">
 <button class="capcut-btn" id="splitBtn">✂️ SPLIT</button>
 <button class="capcut-btn" id="deleteBtn">🗑️ DELETE</button>
@@ -33,8 +33,8 @@ video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min
 <div class="box">
 <video id="prev" controls playsinline></video>
 <div class="progress"><div class="bar" id="bar"></div></div>
-<div class="small" id="statusLine">Ready - V13.1 FIXED - FFmpeg Fixed - Mabilis + Normal!</div>
-<div class="small" id="mergeInfo">V13.1 Fixed - FFmpeg core fixed - Fast Tali Working!</div>
+<div class="small" id="statusLine">Ready - V13.2 BLOB FIX - GitHub Pages CORS Fixed!</div>
+<div class="small" id="mergeInfo">Blob Worker Fix - Same Origin - Gagana na sa GitHub Pages!</div>
 </div>
 
 <div class="box">
@@ -44,20 +44,20 @@ video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min
 <div style="flex:1"><span class="small">Trim Start</span><input type="range" id="trimStart" min="0" max="100" value="0" style="accent-color:#00FF88;width:100%"><span class="small" id="trimStartTxt">00:00</span></div>
 <div style="flex:1"><span class="small">Trim End</span><input type="range" id="trimEnd" min="0" max="100" value="100" style="accent-color:#00FF88;width:100%"><span class="small" id="trimEndTxt">100%</span></div>
 </div>
-<div class="small" id="clipInfo">Tap clip para ma-edit!</div>
+<div class="small" id="clipInfo">Tap clip para edit!</div>
 </div>
 
 <div class="box" style="border:1px solid #00FF88">
-<span class="label" style="color:#00FF88">💾 SAVED MERGES - AUTO SAVE</span>
-<div id="savedList"><div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved - V13.1 Fixed!</div></div>
+<span class="label" style="color:#00FF88">💾 SAVED MERGES</span>
+<div id="savedList"><div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved</div></div>
 <div class="row" style="margin-top:8px"><button class="btn-dark" id="clearAllBtn">🗑️ CLEAR ALL</button><button class="btn-dark" id="refreshSavedBtn">🔄 REFRESH</button></div>
 </div>
 
 <div class="box">
-<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn" style="background:#00FF88;color:#000">🔗 MERGE FAST TALI FIXED!</button></div>
+<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn" style="background:#00FF88;color:#000">🔗 MERGE FAST TALI - FIXED!</button></div>
 <div class="row"><button class="btn-dark" id="wakeBtn">🔒 SCREEN ON</button><button class="btn-dark" id="pipBtn">🖼️ PIP</button></div>
 <div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - NORMAL SPEED!</button></div>
-<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:120px;overflow:auto;white-space:pre-wrap">Log: V13.1 FIXED! FFmpeg import fixed! May internet ka - gagana na! Mabilis merge + Normal speed!</div>
+<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:120px;overflow:auto;white-space:pre-wrap">Log: V13.2 BLOB FIX! GitHub Pages CORS Fixed! Blob Worker! Same-origin fix!</div>
 </div>
 
 <script type="module">
@@ -81,8 +81,7 @@ async function clearAllDB(){const db=await openDB();return new Promise((res,rej)
 async function refreshSavedList(){const items=await getAllFromDB();savedList.innerHTML='';if(items.length===0){savedList.innerHTML='<div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved</div>';return;}items.sort((a,b)=>b.date-a.date);items.forEach(item=>{const div=document.createElement('div');div.className='saved-item';div.innerHTML=`<div style="flex:1"><div style="font-weight:bold;color:#00FF88;font-size:12px">${item.name}</div><div class="small">${fmt(item.duration)} | ${(item.size/1024/1024).toFixed(1)}MB | ${fmtDate(item.date)}</div></div><div style="display:flex;gap:6px"><button class="btn-dark" style="padding:8px" data-dl="${item.id}">💾</button><button class="btn-dark" style="padding:8px" data-del="${item.id}">🗑️</button></div>`;savedList.appendChild(div);});savedList.querySelectorAll('[data-dl]').forEach(btn=>{btn.onclick=async()=>{const id=parseInt(btn.getAttribute('data-dl'));const db=await openDB();const tx=db.transaction(STORE_NAME,'readonly');const req=tx.objectStore(STORE_NAME).get(id);req.onsuccess=()=>{const it=req.result;if(!it)return;const url=URL.createObjectURL(it.blob);const a=document.createElement('a');a.href=url;a.download=it.name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),1000);};};});savedList.querySelectorAll('[data-del]').forEach(btn=>{btn.onclick=async()=>{const id=parseInt(btn.getAttribute('data-del'));if(!confirm('Delete?'))return;await deleteFromDB(id);await refreshSavedList();};});}
 document.getElementById('clearAllBtn').onclick=async()=>{if(!confirm('Clear all?'))return;await clearAllDB();await refreshSavedList();};
 document.getElementById('refreshSavedBtn').onclick=refreshSavedList;refreshSavedList();
-
-function rebuildTimeline(){timeline.innerHTML='';if(clips.length===0){timeline.innerHTML='<div class="small" style="padding:20px">Piliin files!</div>';return;}total=0;clips.forEach(c=>{total+=c.trimDur;});const maxDur=Math.max(...clips.map(c=>c.trimDur),1);clips.forEach((c,i)=>{const el=document.createElement('div');el.className='clip'+(i===selectedIdx?' selected':'');el.style.background=c.color;el.style.width=Math.max(40,(c.trimDur/maxDur)*100+40)+'px';el.innerHTML=`<span style="font-size:9px">${c.name.substring(0,10)}<br>${fmt(c.trimDur)}</span>`;el.onclick=()=>selectClip(i);timeline.appendChild(el);});totalInfo.textContent=`Total: ${fmt(total)} | Files: ${clips.length} | V13.1 FIXED!`;}
+function rebuildTimeline(){timeline.innerHTML='';if(clips.length===0){timeline.innerHTML='<div class="small" style="padding:20px">Piliin files!</div>';return;}total=0;clips.forEach(c=>{total+=c.trimDur;});const maxDur=Math.max(...clips.map(c=>c.trimDur),1);clips.forEach((c,i)=>{const el=document.createElement('div');el.className='clip'+(i===selectedIdx?' selected':'');el.style.background=c.color;el.style.width=Math.max(40,(c.trimDur/maxDur)*100+40)+'px';el.innerHTML=`<span style="font-size:9px">${c.name.substring(0,10)}<br>${fmt(c.trimDur)}</span>`;el.onclick=()=>selectClip(i);timeline.appendChild(el);});totalInfo.textContent=`Total: ${fmt(total)} | Files: ${clips.length} | V13.2 BLOB FIX`;}
 function selectClip(i){selectedIdx=i;const c=clips[i];rebuildTimeline();trimStart.value=(c.trimStart/c.origDur)*100;trimEnd.value=(c.trimEnd/c.origDur)*100;trimStartTxt.textContent=fmt(c.trimStart);trimEndTxt.textContent=fmt(c.trimEnd);clipInfo.textContent=`Selected: ${c.name} | ${fmt(c.trimStart)} - ${fmt(c.trimEnd)}`;try{prev.src=URL.createObjectURL(files[c.fileIdx]);prev.currentTime=c.trimStart;}catch(e){}}
 function updateTrimUI(){if(selectedIdx<0)return;const c=clips[selectedIdx];trimStartTxt.textContent=fmt(c.trimStart);trimEndTxt.textContent=fmt(c.trimEnd);}
 trimStart.oninput=()=>{if(selectedIdx<0)return;const c=clips[selectedIdx];c.trimStart=(trimStart.value/100)*c.origDur;if(c.trimStart>=c.trimEnd-0.5)c.trimStart=c.trimEnd-0.5;c.trimDur=c.trimEnd-c.trimStart;updateTrimUI();rebuildTimeline();};
@@ -91,84 +90,31 @@ async function requestWakeLock(){try{if('wakeLock' in navigator){wakeLock=await 
 document.getElementById('wakeBtn').onclick=requestWakeLock;
 document.getElementById('pipBtn').onclick=async()=>{try{if(document.pictureInPictureEnabled && prev.readyState>0){await prev.requestPictureInPicture();log('PiP ON');}}catch(e){}};
 document.getElementById('resetBtn').onclick=()=>{clips.forEach(c=>{c.trimStart=0;c.trimEnd=c.origDur;c.trimDur=c.origDur;});rebuildTimeline();};
-document.getElementById('videos').onchange=async e=>{files=Array.from(e.target.files);clips=[];selectedIdx=-1;timeline.innerHTML='<div class="small" style="padding:20px">Loading...</div>';for(let i=0;i<files.length;i++){const d=await getDur(files[i]);clips.push({fileIdx:i,name:files[i].name,origDur:d||10,trimStart:0,trimEnd:d||10,trimDur:d||10,color:randomColor()});}rebuildTimeline();log(`Loaded ${clips.length} clips - ${fmt(total)} - V13.1 FIXED!`);if(clips[0])selectClip(0);};
+document.getElementById('videos').onchange=async e=>{files=Array.from(e.target.files);clips=[];selectedIdx=-1;timeline.innerHTML='<div class="small" style="padding:20px">Loading...</div>';for(let i=0;i<files.length;i++){const d=await getDur(files[i]);clips.push({fileIdx:i,name:files[i].name,origDur:d||10,trimStart:0,trimEnd:d||10,trimDur:d||10,color:randomColor()});}rebuildTimeline();log(`Loaded ${clips.length} clips - ${fmt(total)}`);if(clips[0])selectClip(0);};
 document.getElementById('splitBtn').onclick=()=>{if(selectedIdx<0)return alert('Tap clip!');const c=clips[selectedIdx];const curTime=prev.currentTime||c.trimStart+ c.trimDur/2;if(curTime<=c.trimStart+0.5 || curTime>=c.trimEnd-0.5)return alert('Play sa gitna!');const newClip={fileIdx:c.fileIdx,name:c.name+' (2)',origDur:c.origDur,trimStart:curTime,trimEnd:c.trimEnd,trimDur:c.trimEnd-curTime,color:c.color};c.trimEnd=curTime;c.trimDur=c.trimEnd-c.trimStart;clips.splice(selectedIdx+1,0,newClip);rebuildTimeline();};
 document.getElementById('deleteBtn').onclick=()=>{if(selectedIdx<0)return alert('Tap clip!');clips.splice(selectedIdx,1);selectedIdx=-1;rebuildTimeline();};
 
 async function loadFFmpeg(){
  if(ffmpegLoaded)return ffmpeg;
- log('Loading FFmpeg core - may internet ka - wait 10-20 secs first time - V13.1 FIXED!');
- statusLine.textContent='Loading FFmpeg core - first time 10-20 secs - may internet...';
- const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
- ffmpeg = new FFmpeg();
- ffmpeg.on('log', ({ message }) => { log(message); });
- ffmpeg.on('progress', ({ progress, time }) => { 
-   const pct = Math.round(progress*100);
-   bar.style.width = (20 + pct*0.7) + '%';
-   mergeInfo.textContent = `FAST TALI ${pct}% - Direct Copy - Normal speed!`;
- });
- const coreURL = await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript');
- const wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm');
- await ffmpeg.load({ coreURL, wasmURL });
- ffmpegLoaded=true;
- log('✅ FFmpeg loaded! V13.1 FIXED! Ready to merge FAST TALI!');
- return ffmpeg;
-}
-
-document.getElementById('mergeBtn').onclick=async()=>{
- if(clips.length===0)return alert('Pili ka files!');
+ log('Loading FFmpeg - BLOB FIX - GitHub Pages compatible - Wait 15-20 secs first time!');
+ statusLine.textContent='Loading FFmpeg - BLOB FIX - First time 15-20 secs...';
  try{
-   const ff = await loadFFmpeg();
-   bar.style.width='20%';
-   statusLine.textContent='Writing files - FAST TALI - Mabilis parang tali!';
-   for(let i=0;i<clips.length;i++){
-     const c=clips[i];
-     const data = await fetchFile(files[c.fileIdx]);
-     const ext = files[c.fileIdx].name.split('.').pop() || 'mp4';
-     const inputName = `input${i}.${ext}`;
-     c.inputName=inputName; c.ext=ext;
-     await ff.writeFile(inputName, data);
-     if(c.trimStart>0.5 || c.trimEnd < c.origDur-0.5){
-       const trimmedName=`trimmed${i}.${ext}`;
-       log(`Trimming ${i+1} ${fmt(c.trimStart)}-${fmt(c.trimEnd)} FAST...`);
-       await ff.exec(['-ss', c.trimStart.toFixed(3), '-to', c.trimEnd.toFixed(3), '-i', inputName, '-c', 'copy', trimmedName]);
-       c.finalName=trimmedName;
-       try{ await ff.deleteFile(inputName); }catch(e){}
-     } else {
-       c.finalName=inputName;
-     }
-     bar.style.width = Math.round(20 + (i/clips.length)*20) + '%';
-   }
-   let concatList='';
-   clips.forEach(c=>{ concatList+=`file '${c.finalName}'\n`; });
-   await ff.writeFile('list.txt', concatList);
-   log('Concat list - Merging FAST TALI - Direct Copy - 2-3 mins lang! Normal speed result!');
-   statusLine.textContent='Merging FAST TALI - Direct Copy - 2-3 mins lang - Normal speed!';
-   await ff.exec(['-f','concat','-safe','0','-i','list.txt','-c','copy','output.mp4']);
-   bar.style.width='90%';
-   const data = await ff.readFile('output.mp4');
-   lastBlob=new Blob([data.buffer],{type:'video/mp4'});
-   lastBlobUrl=URL.createObjectURL(lastBlob);
-   prev.src=lastBlobUrl; prev.muted=false; try{await prev.play();}catch(e){}
-   bar.style.width='100%';
-   statusLine.textContent=`DONE! FAST TALI! ${fmt(total)} merged! Normal speed!`;
-   mergeInfo.textContent=`DONE! ${fmt(total)} = ${fmt(total)} Normal speed! FAST TALI!`;
-   document.getElementById('dlArea').style.display='block';
-   const fileName=`BOSS_V13.1_FAST_TALI_${fmt(total).replace(/:/g,'-')}_${Date.now()}.mp4`;
-   await saveToDB(lastBlob,fileName,total);
-   await refreshSavedList();
-   log(`💾 AUTO SAVED! ${fileName} ${fmt(total)} Normal speed! ${(lastBlob.size/1024/1024).toFixed(1)}MB`);
-   alert(`DONE BOSS! V13.1 FIXED! FAST TALI! Mabilis na-merge! ${fmt(total)} = ${fmt(total)} Normal speed! Hindi fast forward! Auto saved!`);
- }catch(e){
-   log('FFmpeg error: '+e.message);
-   console.error(e);
-   alert('Error: '+e.message+' - Try refresh - need good internet for first load! V13.1 FIXED pero need internet talaga first time!');
-   statusLine.textContent='Error: '+e.message;
- }
-};
-
-document.getElementById('dlBtn').onclick=()=>{if(!lastBlobUrl)return;const a=document.createElement('a');a.href=lastBlobUrl;a.download=`BOSS_V13.1_FAST_TALI_NORMAL_${Date.now()}.mp4`;document.body.appendChild(a);a.click();document.body.removeChild(a);};
-document.getElementById('prevBtn').onclick=async()=>{if(clips.length===0)return alert('Pili ka!');let idx=0;async function play(){if(idx>=clips.length)return;const c=clips[idx];prev.src=URL.createObjectURL(files[c.fileIdx]);prev.currentTime=c.trimStart;prev.muted=false;try{await prev.play();}catch(e){}const iv=setInterval(()=>{if(prev.currentTime>=c.trimEnd){clearInterval(iv);idx++;play();}},100);prev.onended=()=>{clearInterval(iv);idx++;play();};}play();};
-
-log('V13.1 FIXED ready! FFmpeg import fixed! May internet ka - gagana na! Mabilis merge + Normal speed!');
-</script></body></html>
+   const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+   const ffmpegBase = 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd';
+   ffmpeg = new FFmpeg();
+   ffmpeg.on('log', ({ message }) => { log(message); });
+   ffmpeg.on('progress', ({ progress }) => { 
+     const pct=Math.round(progress*100);
+     bar.style.width=(20+pct*0.7)+'%';
+     mergeInfo.textContent=`FAST TALI ${pct}% - Blob Fix - Normal speed!`;
+   });
+   // BLOB FIX - Convert cross-origin scripts to blob URLs - same origin!
+   const coreURL = await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript');
+   const wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm');
+   const workerURL = await toBlobURL(`${ffmpegBase}/worker.js`, 'text/javascript');
+   
+   log('Core blob created - Loading...');
+   await ffmpeg.load({ coreURL, wasmURL, workerURL });
+   ffmpegLoaded=true;
+   log('✅ FFmpeg loaded! BLOB FIX WORKING! GitHub Pages CORS Fixed!');
+   statusLine.text
