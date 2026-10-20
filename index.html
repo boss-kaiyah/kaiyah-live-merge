@@ -1,98 +1,172 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V20 MATCH FIX</title>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V21 CAPCUT FIXED</title>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js"></script>
-<style>
-body{background:#0a0a0a;color:#fff;font-family:Arial;padding:6px;margin:0}
-.box{background:#151515;border:1px solid #2a2a2a;border-radius:12px;padding:10px;margin:8px 0}
-.label{color:#00FF88;font-weight:bold;font-size:12px;display:block;margin:6px 0 3px}
-input{width:100%;background:#222;color:#fff;padding:8px;border-radius:8px;border:1px solid #444}
-video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:180px}
-.btn{border:none;padding:12px;border-radius:20px;font-weight:bold;flex:1;margin:4px 2px;font-size:12px}
-.btn-yellow{background:#FFD700;color:#000}.btn-green{background:#00FF88;color:#000;padding:14px;border-radius:25px;font-weight:bold;width:100%}.btn-dark{background:#222;color:#00FF88;border:1px solid #00FF88;padding:10px;border-radius:18px;font-weight:bold;flex:1}.small{font-size:10px;color:#aaa}.progress{height:14px;background:#222;border-radius:10px;overflow:hidden;margin:6px 0}.bar{height:100%;width:0%;background:#00FF88}.row{display:flex;gap:6px;flex-wrap:wrap}
-.badge{background:#00FF88;color:#000;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold}
+<style> 
+body{background:#0a0a0a;color:#fff;font-family:Arial;padding:6px;margin:0} 
+.box{background:#151515;border:1px solid #2a2a2a;border-radius:12px;padding:10px;margin:8px 0} 
+.label{color:#FFD700;font-weight:bold;font-size:12px;display:block;margin:6px 0 3px} 
+input,select{width:100%;background:#222;color:#fff;padding:8px;border-radius:8px;border:1px solid #444;font-size:12px} 
+video{width:100%;background:#000;border:2px solid #FFD700;border-radius:10px;min-height:180px} 
+.btn{border:none;padding:12px;border-radius:20px;font-weight:bold;flex:1;margin:4px 2px;font-size:12px} 
+.btn-yellow{background:#FFD700;color:#000}.btn-green{background:#00FF88;color:#000;padding:14px;border-radius:25px;font-weight:bold;width:100%;margin-top:6px}.btn-red{background:#ff3b30;color:#fff}.btn-blue{background:#0a84ff;color:#fff}.btn-dark{background:#222;color:#FFD700;border:1px solid #FFD700;padding:10px;border-radius:18px;font-weight:bold;flex:1}.small{font-size:10px;color:#aaa}.progress{height:10px;background:#222;border-radius:10px;overflow:hidden;margin:6px 0}.bar{height:100%;width:0%;background:#FFD700}.row{display:flex;gap:6px;flex-wrap:wrap} 
+.timeline{width:100%;height:90px;background:#000;border:1px solid #333;border-radius:10px;position:relative;overflow-x:auto;overflow-y:hidden;white-space:nowrap;display:flex;align-items:center;padding:4px} 
+.clip{display:inline-block;height:70px;border-radius:8px;margin-right:4px;position:relative;cursor:pointer;border:2px solid transparent;min-width:40px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:bold;color:#000;overflow:hidden} 
+.clip.selected{border-color:#FFD700;box-shadow:0 0 10px #FFD700} 
+.clip-handle{position:absolute;top:0;width:10px;height:100%;background:rgba(255,215,0,0.9);cursor:ew-resize} 
+.handle-left{left:0;border-radius:8px 0 0 8px}.handle-right{right:0;border-radius:0 8px 8px 0} 
+.playhead{position:absolute;top:0;width:2px;height:100%;background:#ff3b30;z-index:10;pointer-events:none} 
+.capcut-bar{display:flex;gap:4px;margin:6px 0;overflow-x:auto} 
+.capcut-btn{background:#2a2a2a;color:#fff;border:1px solid #444;padding:8px 12px;border-radius:18px;font-size:11px;font-weight:bold;white-space:nowrap} 
+.capcut-btn.active{background:#FFD700;color:#000} 
+.badge{background:#00FF88;color:#000;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold} 
 .saved-item{background:#1a1a1a;border:1px solid #333;border-radius:10px;padding:10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center}
-</style>
-</head><body>
-<h1 style="color:#00FF88;text-align:center;font-size:14px">✂️ V20 <span class="badge">MATCH FIX</span> - NO PROXY_MAIN!</h1>
-<div class="small" style="text-align:center;color:#FFD700">✅ FIXED! 0.11.0 + 0.11.0 Matching! No proxy_main error! jsDelivr CDN! HEVC to H264! Tunay na dugtong!</div>
-
-<div class="box">
-<span class="label">1️⃣ FILES - 1000025191.mp4 HEVC supported!</span>
-<input type="file" id="videos" accept="video/*" multiple>
-<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | V20 MATCH FIX</div>
-<div class="small" id="debugInfo" style="color:#FFD700">Debug: Waiting - Matching versions 0.11.0!</div>
-</div>
-
-<div class="box">
-<video id="prev" controls playsinline></video>
-<div class="progress"><div class="bar" id="bar"></div></div>
-<div class="small" id="statusLine">Ready - V20 MATCH FIX - No proxy_main error!</div>
-<div class="small" id="mergeInfo">0.11.0 + 0.11.0 Matching - jsDelivr - HEVC Convert - Proper Concat!</div>
-</div>
-
+</style></head><body> 
+<h1 style="color:#FFD700;text-align:center;font-size:16px">✂️ V21 <span class="badge">CAPCUT FIXED</span> - CUT + TRIM + SPLIT + HEVC FIX</h1> 
+<div class="small" style="text-align:center;color:#00FF88">✅ FIXED! jsDelivr CDN + 0.11.0 Matching + HEVC to H264 + Tunay na dugtong + No proxy_main + No fetch error!</div> 
+<div class="box"> 
+<span class="label">1️⃣ FILES - 13 files 117:36</span> 
+<input type="file" id="videos" accept="video/*" multiple> 
+<div class="small" id="totalInfo">Total: 00:00 | Files: 0 | Selected: none | V21 FIXED</div> 
+<div class="capcut-bar"> 
+<button class="capcut-btn" id="splitBtn">✂️ SPLIT</button> 
+<button class="capcut-btn" id="deleteBtn">🗑️ DELETE</button> 
+<button class="capcut-btn" id="trimBtn">📐 TRIM</button> 
+<button class="capcut-btn" id="duplicateBtn">📋 DUPLICATE</button> 
+<button class="capcut-btn" id="speedBtn">⚡ SPEED</button> 
+</div> 
+</div> 
+<div class="box"> 
+<video id="prev" controls playsinline></video> 
+<div class="progress"><div class="bar" id="bar"></div></div> 
+<div class="small" id="statusLine">Ready - V21 CapCut Fixed - jsDelivr + Matching + HEVC Fix!</div> 
+<div class="small" id="mergeInfo">V21 Fixed - jsDelivr CDN - No proxy_main - HEVC supported - Tunay na dugtong!</div> 
+</div> 
+<div class="box"> 
+<span class="label">🎬 TIMELINE - PARANG CAPCUT</span> 
+<div class="timeline" id="timeline"> 
+<div class="small" style="padding:20px">Piliin mo muna files - V21 Fixed timeline!</div> 
+<div class="playhead" id="playhead" style="left:0%"></div> 
+</div> 
+<div class="row" style="margin-top:6px"> 
+<div style="flex:1"><span class="small">Trim Start</span><input type="range" id="trimStart" min="0" max="100" value="0" style="accent-color:#FFD700;width:100%"><span class="small" id="trimStartTxt">00:00</span></div> 
+<div style="flex:1"><span class="small">Trim End</span><input type="range" id="trimEnd" min="0" max="100" value="100" style="accent-color:#FFD700;width:100%"><span class="small" id="trimEndTxt">100%</span></div> 
+</div> 
+<div class="small" id="clipInfo">No clip selected - V21 Fixed!</div> 
+</div> 
 <div class="box" style="border:1px solid #00FF88">
-<span class="label" style="color:#00FF88">💾 SAVED MERGES</span>
-<div id="savedList"><div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved - V20 Match Fix!</div></div>
+<span class="label" style="color:#00FF88">💾 SAVED MERGES - AUTO SAVE</span>
+<div id="savedList"><div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved - V21 Fixed!</div></div>
 <div class="row" style="margin-top:8px"><button class="btn-dark" id="clearAllBtn">🗑️ CLEAR ALL</button><button class="btn-dark" id="refreshSavedBtn">🔄 REFRESH</button></div>
 </div>
-
-<div class="box">
-<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn" style="background:#00FF88;color:#000">🔗 MERGE - MATCH FIX - TUNAY NA DUGTONG!</button></div>
-<div class="row"><button class="btn-dark" id="wakeBtn">🔒 SCREEN ON</button></div>
-<div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - BUONG VIDEO - MATCH FIXED!</button></div>
-<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:150px;overflow:auto;white-space:pre-wrap">Log: V20 MATCH FIX! 0.11.0 + 0.11.0 Matching! No proxy_main error! jsDelivr CDN! HEVC to H264! Tunay na dugtong!</div>
-</div>
-
-<script>
-let files=[],clips=[],total=0,wakeLock=null,lastBlobUrl=null,lastBlob=null;
-const prev=document.getElementById('prev'),totalInfo=document.getElementById('totalInfo'),statusLine=document.getElementById('statusLine'),bar=document.getElementById('bar'),mergeInfo=document.getElementById('mergeInfo'),logEl=document.getElementById('log'),savedList=document.getElementById('savedList'),debugInfo=document.getElementById('debugInfo');
-function log(m){logEl.textContent+='\n'+m;logEl.scrollTop=logEl.scrollHeight;console.log(m);}
-function fmt(s){if(isNaN(s)||s<=0)return '00:00';const mm=Math.floor(s/60),ss=Math.floor(s%60);return String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');}
+<div class="box"> 
+<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW TIMELINE</button><button class="btn btn-yellow" id="mergeBtn">🔗 MERGE - V21 FIXED - TUNAY NA DUGTONG!</button></div> 
+<div class="row"><button class="btn-dark" id="pipBtn">🖼️ PIP</button><button class="btn-dark" id="wakeBtn">🔒 SCREEN ON</button><button class="btn-dark" id="resetBtn">🔄 RESET</button></div> 
+<div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - V21 FIXED - TUNAY NA DUGTONG!</button></div> 
+<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:100px;overflow:auto;white-space:pre-wrap">Log: V21 CAPCUT FIXED! Same V10 UI pero merge fixed! jsDelivr CDN + 0.11.0 Matching + HEVC to H264 + No proxy_main + No fetch error + Tunay na dugtong!</div> 
+</div> 
+<script> 
+let files=[],durs=[],clips=[],selectedIdx=-1,total=0,wakeLock=null,merging=false,startTime=0,lastBlobUrl=null,lastBlob=null,worker=null; 
+const prev=document.getElementById('prev'),timeline=document.getElementById('timeline'),totalInfo=document.getElementById('totalInfo'),statusLine=document.getElementById('statusLine'),bar=document.getElementById('bar'),mergeInfo=document.getElementById('mergeInfo'),logEl=document.getElementById('log'),clipInfo=document.getElementById('clipInfo'); 
+const trimStart=document.getElementById('trimStart'),trimEnd=document.getElementById('trimEnd'),trimStartTxt=document.getElementById('trimStartTxt'),trimEndTxt=document.getElementById('trimEndTxt');
+const savedList=document.getElementById('savedList');
+function log(m){logEl.textContent+='\n'+m;logEl.scrollTop=logEl.scrollHeight;console.log(m);} 
+function fmt(s){if(isNaN(s)||s<=0)return '00:00';const mm=Math.floor(s/60),ss=Math.floor(s%60);return String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');} 
 function fmtDate(ts){return new Date(ts).toLocaleString();}
-function getDur(f){return new Promise(r=>{const v=document.createElement('video');v.preload='metadata';v.muted=true;let done=false;const to=setTimeout(()=>{if(!done){done=true;r(10);}},4000);v.onloadedmetadata=()=>{if(!done){done=true;clearTimeout(to);r(v.duration||10);try{URL.revokeObjectURL(v.src);}catch(e){}}};v.onerror=()=>{if(!done){done=true;clearTimeout(to);r(10);}};try{v.src=URL.createObjectURL(f);}catch(e){r(10);}});}
+function getDur(f){return new Promise(r=>{const v=document.createElement('video');v.preload='metadata';v.muted=true;let done=false;const to=setTimeout(()=>{if(!done){done=true;r(10);}},4000);v.onloadedmetadata=()=>{if(!done){done=true;clearTimeout(to);r(v.duration||10);try{URL.revokeObjectURL(v.src);}catch(e){}}};v.onerror=()=>{if(!done){done=true;clearTimeout(to);r(10);}};try{v.src=URL.createObjectURL(f);}catch(e){r(10);}});} 
+function randomColor(){const colors=['#FFD700','#00FF88','#0a84ff','#ff3b30','#bf5af2','#ff9f0a','#30d158'];return colors[Math.floor(Math.random()*colors.length)];} 
 const DB_NAME='BossKaiyahDB',STORE_NAME='merges';
 function openDB(){return new Promise((res,rej)=>{const req=indexedDB.open(DB_NAME,1);req.onupgradeneeded=e=>{const db=e.target.result;if(!db.objectStoreNames.contains(STORE_NAME)){db.createObjectStore(STORE_NAME,{keyPath:'id'});}};req.onsuccess=e=>res(e.target.result);req.onerror=e=>rej(e.target.error);});}
 async function saveToDB(blob,name,duration){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE_NAME,'readwrite');const store=tx.objectStore(STORE_NAME);const id=Date.now();const item={id,name,duration,size:blob.size,date:id,blob};store.put(item);tx.oncomplete=()=>res(item);tx.onerror=()=>rej(tx.error);});}
 async function getAllFromDB(){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE_NAME,'readonly');const store=tx.objectStore(STORE_NAME);const req=store.getAll();req.onsuccess=()=>res(req.result);req.onerror=()=>rej(req.error);});}
 async function deleteFromDB(id){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE_NAME,'readwrite');tx.objectStore(STORE_NAME).delete(id);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}
 async function clearAllDB(){const db=await openDB();return new Promise((res,rej)=>{const tx=db.transaction(STORE_NAME,'readwrite');tx.objectStore(STORE_NAME).clear();tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error);});}
-async function refreshSavedList(){const items=await getAllFromDB();savedList.innerHTML='';if(items.length===0){savedList.innerHTML='<div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved</div>';return;}items.sort((a,b)=>b.date-a.date);items.forEach(item=>{const div=document.createElement('div');div.className='saved-item';div.innerHTML=`<div style="flex:1"><div style="font-weight:bold;color:#00FF88;font-size:12px">${item.name}</div><div class="small">${fmt(item.duration)} | ${(item.size/1024/1024).toFixed(1)}MB</div></div><div style="display:flex;gap:6px"><button class="btn-dark" style="padding:8px" data-dl="${item.id}">💾</button><button class="btn-dark" style="padding:8px" data-del="${item.id}">🗑️</button></div>`;savedList.appendChild(div);});savedList.querySelectorAll('[data-dl]').forEach(btn=>{btn.onclick=async()=>{const id=parseInt(btn.getAttribute('data-dl'));const db=await openDB();const tx=db.transaction(STORE_NAME,'readonly');const req=tx.objectStore(STORE_NAME).get(id);req.onsuccess=()=>{const it=req.result;if(!it)return;const url=URL.createObjectURL(it.blob);const a=document.createElement('a');a.href=url;a.download=it.name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),1000);};};});savedList.querySelectorAll('[data-del]').forEach(btn=>{btn.onclick=async()=>{const id=parseInt(btn.getAttribute('data-del'));if(!confirm('Delete?'))return;await deleteFromDB(id);await refreshSavedList();};});}
+async function refreshSavedList(){const items=await getAllFromDB();savedList.innerHTML='';if(items.length===0){savedList.innerHTML='<div class="small" style="padding:10px;background:#000;border-radius:8px">Wala pang saved</div>';return;}items.sort((a,b)=>b.date-a.date);items.forEach(item=>{const div=document.createElement('div');div.className='saved-item';div.innerHTML=`<div style="flex:1"><div style="font-weight:bold;color:#00FF88;font-size:12px">${item.name}</div><div class="small">${fmt(item.duration)} | ${(item.size/1024/1024).toFixed(1)}MB | ${fmtDate(item.date)}</div></div><div style="display:flex;gap:6px"><button class="btn-dark" style="padding:6px" data-dl="${item.id}">💾</button><button class="btn-dark" style="padding:6px" data-del="${item.id}">🗑️</button></div>`;savedList.appendChild(div);});savedList.querySelectorAll('[data-dl]').forEach(btn=>{btn.onclick=async()=>{const id=parseInt(btn.getAttribute('data-dl'));const db=await openDB();const tx=db.transaction(STORE_NAME,'readonly');const req=tx.objectStore(STORE_NAME).get(id);req.onsuccess=()=>{const it=req.result;if(!it)return;const url=URL.createObjectURL(it.blob);const a=document.createElement('a');a.href=url;a.download=it.name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),1000);};};});savedList.querySelectorAll('[data-del]').forEach(btn=>{btn.onclick=async()=>{const id=parseInt(btn.getAttribute('data-del'));if(!confirm('Delete?'))return;await deleteFromDB(id);await refreshSavedList();};});}
 document.getElementById('clearAllBtn').onclick=async()=>{if(!confirm('Clear all?'))return;await clearAllDB();await refreshSavedList();};
 document.getElementById('refreshSavedBtn').onclick=refreshSavedList;refreshSavedList();
-async function requestWakeLock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');log('WakeLock ON');}}catch(e){}}
-document.getElementById('wakeBtn').onclick=requestWakeLock;
+function rebuildTimeline(){ timeline.innerHTML=''; const playheadEl=document.createElement('div'); playheadEl.className='playhead'; playheadEl.id='playhead'; timeline.appendChild(playheadEl); if(clips.length===0){timeline.innerHTML='<div class="small" style="padding:20px">No clips - piliin files!</div>'; return;} total=0; clips.forEach(c=>{total+=c.trimDur;}); const maxDur=Math.max(...clips.map(c=>c.trimDur),1); clips.forEach((c,i)=>{ const el=document.createElement('div'); el.className='clip'+(i===selectedIdx?' selected':''); el.style.background=c.color; el.style.width=Math.max(40,(c.trimDur/maxDur)*120+40)+'px'; el.innerHTML=`<span style="font-size:9px">${c.name.substring(0,12)}<br>${fmt(c.trimDur)}</span><div class="clip-handle handle-left"></div><div class="clip-handle handle-right"></div>`; el.onclick=()=>{selectClip(i);}; timeline.appendChild(el); }); totalInfo.textContent=`Total: ${fmt(total)} | Files: ${clips.length} | Selected: ${selectedIdx>=0?clips[selectedIdx].name:'none'} | V21 FIXED`; } 
+function selectClip(i){ selectedIdx=i; const c=clips[i]; rebuildTimeline(); trimStart.value=(c.trimStart/c.origDur)*100; trimEnd.value=(c.trimEnd/c.origDur)*100; trimStartTxt.textContent=fmt(c.trimStart); trimEndTxt.textContent=fmt(c.trimEnd); clipInfo.textContent=`Selected: ${c.name} | Trim: ${fmt(c.trimStart)} - ${fmt(c.trimEnd)} | Dur: ${fmt(c.trimDur)} | V21 Fixed!`; try{prev.src=URL.createObjectURL(files[c.fileIdx]); prev.currentTime=c.trimStart; }catch(e){} } 
+function updateTrimUI(){ if(selectedIdx<0)return; const c=clips[selectedIdx]; trimStartTxt.textContent=fmt(c.trimStart); trimEndTxt.textContent=fmt(c.trimEnd); clipInfo.textContent=`Selected: ${c.name} | Trim: ${fmt(c.trimStart)} - ${fmt(c.trimEnd)} | Dur: ${fmt(c.trimDur)} | V21 Fixed!`; } 
+trimStart.oninput=()=>{if(selectedIdx<0)return; const c=clips[selectedIdx]; c.trimStart=(trimStart.value/100)*c.origDur; if(c.trimStart>=c.trimEnd-0.5){c.trimStart=c.trimEnd-0.5;} c.trimDur=c.trimEnd-c.trimStart; updateTrimUI(); rebuildTimeline();}; 
+trimEnd.oninput=()=>{if(selectedIdx<0)return; const c=clips[selectedIdx]; c.trimEnd=(trimEnd.value/100)*c.origDur; if(c.trimEnd<=c.trimStart+0.5){c.trimEnd=c.trimStart+0.5;} c.trimDur=c.trimEnd-c.trimStart; updateTrimUI(); rebuildTimeline();}; 
+async function requestWakeLock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');log('✅ WakeLock ON');}}catch(e){}} 
+document.getElementById('wakeBtn').onclick=requestWakeLock; 
+document.getElementById('pipBtn').onclick=async()=>{try{if(document.pictureInPictureEnabled && prev.readyState>0){await prev.requestPictureInPicture();log('✅ PiP ON');}}catch(e){log('PiP error');}}; 
+document.getElementById('resetBtn').onclick=()=>{clips.forEach(c=>{c.trimStart=0; c.trimEnd=c.origDur; c.trimDur=c.origDur;}); rebuildTimeline(); log('Reset trims!');}; 
+document.getElementById('videos').onchange=async e=>{ files=Array.from(e.target.files); clips=[]; durs=[]; selectedIdx=-1; timeline.innerHTML='<div class="small" style="padding:20px">Loading...</div>'; log(`Loading ${files.length} files - V21 Fixed...`); for(let i=0;i<files.length;i++){const d=await getDur(files[i]); durs.push(d||10); clips.push({fileIdx:i, name:files[i].name, origDur:d||10, trimStart:0, trimEnd:d||10, trimDur:d||10, color:randomColor()});} rebuildTimeline(); log(`Loaded ${clips.length} clips - Total ${fmt(total)} - V21 Fixed!`); if(clips[0])selectClip(0); }; 
+document.getElementById('splitBtn').onclick=()=>{ if(selectedIdx<0)return alert('Tap clip!'); const c=clips[selectedIdx]; const curTime=prev.currentTime||c.trimStart+ c.trimDur/2; if(curTime<=c.trimStart+0.5 || curTime>=c.trimEnd-0.5)return alert('Play sa gitna bago split!'); const newClip={fileIdx:c.fileIdx, name:c.name+' (2)', origDur:c.origDur, trimStart:curTime, trimEnd:c.trimEnd, trimDur:c.trimEnd-curTime, color:c.color}; c.trimEnd=curTime; c.trimDur=c.trimEnd-c.trimStart; clips.splice(selectedIdx+1,0,newClip); rebuildTimeline(); log(`✂️ Split at ${fmt(curTime)}`); }; 
+document.getElementById('deleteBtn').onclick=()=>{ if(selectedIdx<0)return alert('Tap clip!'); if(!confirm(`Delete ${clips[selectedIdx].name}?`))return; clips.splice(selectedIdx,1); selectedIdx=-1; rebuildTimeline(); log('🗑️ Deleted'); }; 
+document.getElementById('duplicateBtn').onclick=()=>{ if(selectedIdx<0)return alert('Tap clip!'); const c=clips[selectedIdx]; const dup={...c, name:c.name+' copy', color:randomColor()}; clips.splice(selectedIdx+1,0,dup); rebuildTimeline(); log('📋 Duplicated!'); }; 
+document.getElementById('speedBtn').onclick=()=>{alert('V21 Fixed - FFmpeg mode - Normal speed result - Tunay na dugtong!');}; 
 
-document.getElementById('videos').onchange=async e=>{
- files=Array.from(e.target.files||[]);
- clips=[];
- total=0;
- for(let i=0;i<files.length;i++){
-   const d=await getDur(files[i]);
-   clips.push({fileIdx:i,name:files[i].name,dur:d});
-   total+=d;
- }
- totalInfo.textContent=`Total: ${fmt(total)} | Files: ${files.length} | V20 MATCH FIX`;
- debugInfo.textContent=`Debug: ${files.length} files - Total ${fmt(total)} - Matching 0.11.0 - No proxy_main!`;
- log(`Loaded ${files.length} files - Total ${fmt(total)} - Matching versions!`);
- if(files[0]){ prev.src=URL.createObjectURL(files[0]); }
-};
-
+// V21 FIXED MERGE - FFmpeg 0.11.0 Matching + jsDelivr + HEVC to H264 + Proper Concat
 document.getElementById('mergeBtn').onclick=async()=>{
- if(files.length==0)return alert('Pili ka files!');
+ if(clips.length===0)return alert('Pili ka files!');
+ if(merging)return;
+ merging=true;
  const { createFFmpeg, fetchFile } = FFmpeg;
- // MATCHING VERSION - 0.11.0 + 0.11.0 - No proxy_main error!
  const ffmpeg = createFFmpeg({
    log: true,
    corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-st@0.11.0/dist/ffmpeg-core.js'
  });
  ffmpeg.setProgress(({ ratio }) => {
    bar.style.width=Math.round(ratio*100)+'%';
-   mergeInfo.textContent=`PROPER TALI MATCH FIX ${Math.round(ratio*100)}% - ${fmt(total)}!`;
+   mergeInfo.textContent=`V21 FIXED ${Math.round(ratio*100)}% - ${fmt(total)} - Tunay na dugtong!`;
  });
  try{
-   log('Loading FFmpeg MATCHING 0.11.0 + 0.11.0 - No proxy_main error - jsDelivr CDN - 15-20 secs first time...');
-   statusLine.textContent='Loading FFmpeg Matching 0.11.0 - No proxy_main - 15-20 secs...';
+   log('Loading FFmpeg V21 MATCHING 0.11.0 + 0.11.0 - jsDelivr - No proxy_main - HEVC Fix - 15-20 secs first time...');
+   statusLine.textContent='Loading FFmpeg V21 Matching - No proxy_main - 15-20 secs...';
    bar.style.width='10%';
-   debugInfo.textContent='Debug: Loading FFmpeg Matching 0.11.0 - No proxy_main error - Please wait...';
-   if(!ffmpeg.isLoaded()){
-     await ffmpeg.load();
-  
+   if(!ffmpeg.isLoaded()){ await ffmpeg.load(); }
+   log('✅ FFmpeg V21 MATCHING loaded! No proxy_main! HEVC Fix!');
+   bar.style.width='20%';
+   for(let i=0;i<clips.length;i++){
+     const c=clips[i];
+     const data=await fetchFile(files[c.fileIdx]);
+     const inputName=`input${i}.mp4`;
+     ffmpeg.FS('writeFile', inputName, data);
+     const outName=`converted${i}.mp4`;
+     if(c.trimStart>0.5 || c.trimEnd < c.origDur-0.5){
+       log(`Trim+Convert ${i+1}/${clips.length} ${c.name} ${fmt(c.trimStart)}-${fmt(c.trimEnd)} - HEVC to H264...`);
+       await ffmpeg.run('-ss', c.trimStart.toFixed(3), '-to', c.trimEnd.toFixed(3), '-i', inputName, '-c:v', 'libx264', '-preset', 'ultrafast', '-c:a', 'aac', outName);
+     } else {
+       log(`Convert ${i+1}/${clips.length} ${c.name} - HEVC to H264 - Ultrafast...`);
+       await ffmpeg.run('-i', inputName, '-c:v', 'libx264', '-preset', 'ultrafast', '-c:a', 'aac', outName);
+     }
+     c.finalName=outName;
+     try{ffmpeg.FS('unlink', inputName);}catch(e){}
+     bar.style.width=Math.round(20 + (i/clips.length)*50)+'%';
+   }
+   let concatList='';
+   clips.forEach(c=>{ concatList+=`file '${c.finalName}'\n`; });
+   ffmpeg.FS('writeFile', 'list.txt', concatList);
+   log('Merging Proper - V21 Fixed - Tunay na dugtong - Normal speed!');
+   await ffmpeg.run('-f','concat','-safe','0','-i','list.txt','-c','copy','output.mp4');
+   bar.style.width='90%';
+   const data=ffmpeg.FS('readFile', 'output.mp4');
+   lastBlob=new Blob([data.buffer],{type:'video/mp4'});
+   lastBlobUrl=URL.createObjectURL(lastBlob);
+   prev.src=lastBlobUrl;
+   prev.muted=false;
+   try{await prev.play();}catch(e){}
+   bar.style.width='100%';
+   statusLine.textContent=`DONE! V21 FIXED! ${fmt(total)} - Tunay na dugtong - HEVC Fixed!`;
+   mergeInfo.textContent=`DONE! ${fmt(total)} = ${fmt(total)} - No proxy_main - Tunay na dugtong!`;
+   document.getElementById('dlArea').style.display='block';
+   const fileName=`BOSS_V21_CAPCUT_FIXED_${fmt(total).replace(/:/g,'-')}_${Date.now()}.mp4`;
+   await saveToDB(lastBlob,fileName,total);
+   await refreshSavedList();
+   log(`💾 AUTO SAVED! ${fileName} - ${fmt(total)} - V21 Fixed!`);
+   alert(`DONE BOSS! V21 CAPCUT FIXED! ${fmt(total)} - Buong video! HEVC fixed! No proxy_main! Tunay na dugtong!`);
+   merging=false;
+ }catch(e){
+   log('FFmpeg V21 error: '+e.message);
+   console.error(e);
+   alert('Error: '+e.message+' - V21 Matching Fix - Try ulit - Check internet!');
+   statusLine.textContent='Error: '+e.message;
+   bar.style.width='0%';
+   merging=false;
+ }
+};
+
+document.getElementById('dlBtn').onclick=()=>{if(!lastBlobUrl)return; const a=document.createElement('a'); a.href=lastBlobUrl; a.download=`BOSS_V21_CAPCUT_FIXED_${Date.now()}.mp4`; document.body.appendChild(a); a.click(); document.body.removeChild(a);}; 
+document.getElementById('prevBtn').onclick=async()=>{ if(clips.length===0)return alert('Pili ka!'); let idx=0; async function play(){if(idx>=clips.length)return; const c=clips[idx]; prev.src=URL.createObjectURL(files[c.fileIdx]); prev.currentTime=c.trimStart; prev.muted=false; try{await prev.play();}catch(e){} const iv=setInterval(()=>{if(prev.currentTime>=c.trimEnd){clearInterval(iv); idx++; play();}},100); prev.onended=()=>{clearInterval(iv); idx++; play();};} play(); }; 
+</script></body></html>
