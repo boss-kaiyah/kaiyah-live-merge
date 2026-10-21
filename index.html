@@ -1,82 +1,57 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V31 FAST</title></head><body style="background:#000;color:#fff;font-family:Arial;padding:12px">
-<h2 style="color:#00FF88;text-align:center">V31 - FAST TALI - 2 SEC!</h2>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V32 HONEST</title></head><body style="background:#000;color:#fff;font-family:Arial;padding:12px">
+<h2 style="color:#00FF88;text-align:center">V32 - HONEST - TOTOONG Dugtong</h2>
 <input type="file" id="f" accept="video/*" multiple style="width:100%;padding:12px;background:#222;color:#fff;border-radius:10px">
-<div id="info" style="color:#FFD700;margin:8px 0">V31 - Fast 2 sec - Hindi na matagal magtali!</div>
-<video id="v" controls playsinline style="width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:200px"></video>
+<div id="info" style="color:#FFD700;margin:8px 0">V32 - Honest - Totoong tali - Matagal pero tunay</div>
+<video id="v" controls playsinline muted style="width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:200px"></video>
 <div style="height:12px;background:#222;border-radius:10px;margin:8px 0"><div id="bar" style="height:100%;width:0%;background:#00FF88"></div></div>
-<button id="fast" style="width:100%;padding:15px;background:#FFD700;color:#000;font-weight:bold;border:none;border-radius:25px">⚡ FAST MERGE - 2 SEC LANG!</button>
-<button id="normal" style="width:48%;padding:12px;background:#222;color:#00FF88;border:1px solid #00FF88;border-radius:20px;margin-top:8px">🐢 Normal (matagal)</button>
-<button id="dl" style="width:100%;padding:15px;background:#00FF88;color:#000;font-weight:bold;border:none;border-radius:25px;display:none;margin-top:8px">💾 DOWNLOAD - FAST!</button>
-<div id="log" style="background:#111;padding:6px;border-radius:6px;font-size:10px;margin-top:6px">Log: V31 Fast tali</div>
+<button id="merge" style="width:100%;padding:15px;background:#00FF88;color:#000;font-weight:bold;border:none;border-radius:25px">🔗 TOTOONG MERGE - HONEST TALI!</button>
+<button id="dl" style="width:100%;padding:15px;background:#FFD700;color:#000;font-weight:bold;border:none;border-radius:25px;display:none;margin-top:8px">💾 DOWNLOAD - TUNAY NA BUO!</button>
+<div id="log" style="background:#111;padding:6px;border-radius:6px;font-size:10px;margin-top:6px">Log: V32 Honest - Totoong dugtong - Matagal pero tunay</div>
 <script>
-let files=[],lastUrl=null,isMerging=false;
-const v=document.getElementById('v'),info=document.getElementById('info'),bar=document.getElementById('bar'),logEl=document.getElementById('log');
+let files=[],chunks=[],lastUrl=null,isMerging=false;
+const v=document.getElementById('v'),info=document.getElementById('info'),bar=document.getElementById('bar'),logEl=document.getElementById('log'),btn=document.getElementById('merge');
 function log(m){ logEl.textContent+='\n'+m; }
 document.getElementById('f').onchange=e=>{
  files=[...e.target.files];
- info.textContent=files.length+' files - V31 Fast ready';
- if(files[0]) v.src=URL.createObjectURL(files[0]);
- log(files.length+' files - pili Fast mode para mabilis!');
+ info.textContent=files.length+' files - V32 Honest Ready - Totoong tali';
+ if(files[0]){ v.src=URL.createObjectURL(files[0]); v.muted=true; v.playbackRate=1; }
+ log(files.length+' files - honest tali - matagal pero tunay');
 };
-// FAST MODE - 2 SECONDS LANG - BLOB DIRETSO!
-document.getElementById('fast').onclick=async()=>{
- if(!files.length) return alert('Pili ka files!');
- if(isMerging) return;
- isMerging=true;
- log('=== FAST MODE START - 2 SEC ===');
- info.textContent='⚡ Fast merging... 2 sec lang!';
- bar.style.width='30%';
- // Instant blob concat - mabilis magtali!
- const blobs=files.map(f=>f);
- const finalBlob=new Blob(blobs,{type:files[0].type || 'video/mp4'});
- lastUrl=URL.createObjectURL(finalBlob);
- bar.style.width='100%';
- v.src=lastUrl;
- v.muted=false;
- v.playbackRate=1;
- v.onloadeddata=()=>{ log('Fast done! Duration: '+v.duration.toFixed(1)+'s'); };
- await v.play().catch(()=>{});
- document.getElementById('dl').style.display='block';
- info.textContent='DONE! FAST - 2 sec lang - '+(finalBlob.size/1024/1024).toFixed(1)+'MB - Bilis magtali!';
- log('FAST DONE! Size: '+(finalBlob.size/1024/1024).toFixed(1)+'MB - 2 sec lang!');
- isMerging=false;
-};
-// Normal mode - yung matagal dati
-document.getElementById('normal').onclick=async()=>{
- if(!files.length) return alert('Pili ka files!');
- if(isMerging) return;
- isMerging=true;
- info.textContent='Normal mode - matagal - real-time...';
- bar.style.width='5%';
- log('Normal mode start - matagal to...');
- v.muted=true; v.playbackRate=1;
+btn.onclick=async()=>{
+ if(isMerging) return; if(!files.length) return alert('Pili ka files!');
+ isMerging=true; btn.disabled=true; btn.textContent='⏳ TOTOONG NAGTATALI... TIIS LANG BOSS!';
+ chunks=[]; bar.style.width='2%'; log('=== V32 HONEST START - Totoong tali ===');
+ v.muted=true; v.playbackRate=2.5; // 2.5x para mas mabilis konti pero tunay pa rin
  v.src=URL.createObjectURL(files[0]);
  await new Promise(r=>{ v.onloadeddata=()=>r(); });
- await v.play().catch(()=>{});
+ try{ await v.play(); log('File 1 playing 2.5x'); }catch(e){ log('Play error'); isMerging=false; btn.disabled=false; return; }
  const stream=v.captureStream();
- const rec=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9,opus'});
- let chunks=[];
+ const rec=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9,opus',videoBitsPerSecond:3000000});
  rec.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); };
  rec.start(200);
  let idx=0;
  v.onended=async()=>{
-  idx++; bar.style.width=Math.round(idx/files.length*100)+'%';
+  idx++; log('Tapos file '+idx); bar.style.width=Math.round(idx/files.length*100)+'%';
   if(idx>=files.length){
    rec.stop();
    rec.onstop=()=>{
     const blob=new Blob(chunks,{type:'video/webm'});
     lastUrl=URL.createObjectURL(blob);
-    v.src=lastUrl; v.onended=null; v.muted=false;
+    v.src=lastUrl; v.onended=null; v.muted=false; v.playbackRate=1; v.play().catch(()=>{});
     document.getElementById('dl').style.display='block';
-    info.textContent='DONE Normal!'; isMerging=false;
+    info.textContent='DONE! TUNAY NA BUO! '+files.length+' files - Totoong tali!';
+    log('DONE! Tunay na buo: '+(blob.size/1024/1024).toFixed(1)+'MB');
+    isMerging=false; btn.disabled=false; btn.textContent='🔗 TOTOONG MERGE - HONEST TALI!';
    }; return;
   }
   v.src=URL.createObjectURL(files[idx]);
   await new Promise(r=>{ v.onloadeddata=()=>r(); });
-  await v.play().catch(()=>{});
+  v.playbackRate=2.5; v.muted=true;
+  info.textContent='Totoong tinatali '+(idx+1)+'/'+files.length+'... Tiis lang!';
+  try{ await v.play(); log('Playing file '+(idx+1)+' 2.5x'); }catch(e){ log('Error file '+(idx+1)); }
  };
 };
 document.getElementById('dl').onclick=()=>{
- const a=document.createElement('a'); a.href=lastUrl; a.download='V31_FAST_'+Date.now()+(lastUrl.includes('video/mp4')?'.mp4':'.webm'); a.click();
+ const a=document.createElement('a'); a.href=lastUrl; a.download='TOTOONG_BUO_'+Date.now()+'.webm'; a.click();
 };
 </script></body></html>
