@@ -1,57 +1,58 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V32 HONEST</title></head><body style="background:#000;color:#fff;font-family:Arial;padding:12px">
-<h2 style="color:#00FF88;text-align:center">V32 - HONEST - TOTOONG Dugtong</h2>
-<input type="file" id="f" accept="video/*" multiple style="width:100%;padding:12px;background:#222;color:#fff;border-radius:10px">
-<div id="info" style="color:#FFD700;margin:8px 0">V32 - Honest - Totoong tali - Matagal pero tunay</div>
-<video id="v" controls playsinline muted style="width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:200px"></video>
-<div style="height:12px;background:#222;border-radius:10px;margin:8px 0"><div id="bar" style="height:100%;width:0%;background:#00FF88"></div></div>
-<button id="merge" style="width:100%;padding:15px;background:#00FF88;color:#000;font-weight:bold;border:none;border-radius:25px">🔗 TOTOONG MERGE - HONEST TALI!</button>
-<button id="dl" style="width:100%;padding:15px;background:#FFD700;color:#000;font-weight:bold;border:none;border-radius:25px;display:none;margin-top:8px">💾 DOWNLOAD - TUNAY NA BUO!</button>
-<div id="log" style="background:#111;padding:6px;border-radius:6px;font-size:10px;margin-top:6px">Log: V32 Honest - Totoong dugtong - Matagal pero tunay</div>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V9 BACKGROUND FIX</title><style>
+body{background:#000;color:#fff;font-family:Arial;padding:8px;margin:0}.box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin:10px 0}.label{color:#FFD700;font-weight:bold;font-size:13px;display:block;margin:8px 0 4px}input,select{width:100%;background:#222;color:#fff;padding:10px;border-radius:8px;border:1px solid #444}.list{max-height:130px;overflow:auto;background:#000;padding:8px;border-radius:8px;font-size:12px}video{width:100%;background:#000;border:2px solid #FFD700;border-radius:10px;min-height:200px}.btn{border:none;padding:14px;border-radius:25px;font-weight:bold;flex:1;margin:5px 2px}.btn-yellow{background:#FFD700;color:#000}.btn-green{background:#00FF88;color:#000;padding:14px;border-radius:25px;font-weight:bold;width:100%;margin-top:8px}.btn-dark{background:#222;color:#FFD700;border:1px solid #FFD700;padding:12px;width:100%;margin-top:8px;border-radius:20px;font-weight:bold}.small{font-size:11px;color:#aaa}.progress{height:14px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.bar{height:100%;width:0%;background:#FFD700}.row{display:flex;gap:8px}.badge{background:#00FF88;color:#000;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:bold}
+</style></head><body>
+<h1 style="color:#FFD700;text-align:center">✂️ V9 <span class="badge">NO STOP FIX</span></h1>
+<div class="small" style="text-align:center;color:#00FF88">✅ FIX: Worker + PiP - Hindi na mag-stop pag nag-Messenger!</div>
+<div class="box">
+<span class="label">1️⃣ FILES - 117:36 mo</span><input type="file" id="videos" accept="video/*" multiple><div id="vList" class="list">Piliin 13 files mo</div><div class="small" id="totalInfo">Total: 00:00 | Files: 0</div>
+<span class="label">⚡ SPEED</span><select id="speed"><option value="8" selected>8x ULTRA FAST - 3.8mins actual</option></select>
+<select id="res" style="display:none"><option value="1280x720" selected>720p</option></select>
+</div>
+<div class="box">
+<video id="prev" controls playsinline></video>
+<div class="small" id="statusLine">Ready - V9 No Stop Fix - Worker + PiP active!</div>
+<div class="progress"><div class="bar" id="bar"></div></div><div class="small" id="mergeInfo">Tip: Use Split Screen para 100% no stop! Square button > Split screen > Chrome sa taas, Messenger sa baba!</div>
+</div>
+<div class="box">
+<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW</button><button class="btn btn-yellow" id="mergeBtn">🔗 MERGE TO 2HRS 8X</button></div>
+<div class="row"><button class="btn-dark" id="pipBtn">🖼️ PICTURE-IN-PICTURE - Para tuloy pag Messenger!</button><button class="btn-dark" id="wakeBtn">🔒 KEEP SCREEN ON</button></div>
+<div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - WORKING!</button></div>
+<div class="small" id="log" style="background:#000;padding:6px;border-radius:6px;max-height:100px;overflow:auto;white-space:pre-wrap">Log: V9 Background Fix - Worker timer + PiP - Hindi na mag-stop pag nag-reply sa Messenger! Split screen mas sure!</div>
+</div>
+<div class="box" style="border:1px solid #00FF88"><div style="color:#00FF88;font-weight:bold">📱 PAANO HINDI MAG-STOP PAG MESSENGER:</div><div class="small" style="line-height:1.6">
+1. SPLIT SCREEN: Square button > Long press Chrome icon > Split screen > Chrome taas, Messenger baba - TULOY!<br>
+2. PICTURE-IN-PICTURE: Pindot 🖼️ PiP button - liliit video - kahit Messenger - tuloy!<br>
+3. Wag pindot Home - gamitin Split Screen!<br>
+</div></div>
 <script>
-let files=[],chunks=[],lastUrl=null,isMerging=false;
-const v=document.getElementById('v'),info=document.getElementById('info'),bar=document.getElementById('bar'),logEl=document.getElementById('log'),btn=document.getElementById('merge');
-function log(m){ logEl.textContent+='\n'+m; }
-document.getElementById('f').onchange=e=>{
- files=[...e.target.files];
- info.textContent=files.length+' files - V32 Honest Ready - Totoong tali';
- if(files[0]){ v.src=URL.createObjectURL(files[0]); v.muted=true; v.playbackRate=1; }
- log(files.length+' files - honest tali - matagal pero tunay');
+let files=[],durs=[],total=0,wakeLock=null,merging=false,startTime=0,lastBlobUrl=null,lastBlob=null,worker=null;
+const prev=document.getElementById('prev'),vList=document.getElementById('vList'),totalInfo=document.getElementById('totalInfo'),statusLine=document.getElementById('statusLine'),bar=document.getElementById('bar'),mergeInfo=document.getElementById('mergeInfo'),logEl=document.getElementById('log');
+function log(m){logEl.textContent+='\n'+m;logEl.scrollTop=logEl.scrollHeight;}
+function fmt(s){if(isNaN(s)||s<=0)return '00:00';const mm=Math.floor(s/60),ss=Math.floor(s%60);return String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');}
+function getDur(f){return new Promise(r=>{const v=document.createElement('video');v.preload='metadata';v.muted=true;let done=false;const to=setTimeout(()=>{if(!done){done=true;r(0);}},3000);v.onloadedmetadata=()=>{if(!done){done=true;clearTimeout(to);r(v.duration);URL.revokeObjectURL(v.src);}};v.onerror=()=>{if(!done){done=true;clearTimeout(to);r(0);}};try{v.src=URL.createObjectURL(f);}catch(e){r(0);}});}
+async function requestWakeLock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');log('✅ WakeLock ON');} }catch(e){}}
+document.getElementById('wakeBtn').onclick=requestWakeLock;
+document.addEventListener('visibilitychange',async()=>{if(wakeLock!==null && document.visibilityState==='visible'){await requestWakeLock();} if(document.visibilityState==='hidden' && merging){log('⚠️ Nag-background ka - pero Worker tuloy parin! Gamit Split Screen para 100% sure!');}});
+document.getElementById('pipBtn').onclick=async()=>{try{if(document.pictureInPictureEnabled && prev.readyState>0){await prev.requestPictureInPicture();log('✅ PiP ON - Kahit mag-Messenger - tuloy video!');}else{log('PiP need video playing muna - pindot Preview muna');}}catch(e){log('PiP error: '+e.message);}};
+document.getElementById('videos').onchange=async e=>{files=Array.from(e.target.files);durs=[];total=0;vList.innerHTML='';for(let i=0;i<files.length;i++){vList.innerHTML+=`${i+1}. ${files[i].name}<br>`;}for(let i=0;i<files.length;i++){const d=await getDur(files[i]);durs.push(d||0);total+=d||0;}totalInfo.textContent=`Total: ${fmt(total)} | Files: ${files.length}`;if(files[0]){try{prev.src=URL.createObjectURL(files[0]);}catch(e){}}};
+let rec,chunks=[],canvas,ctx;
+document.getElementById('mergeBtn').onclick=async()=>{
+ if(files.length===0)return alert('Pili ka!');if(merging)return;merging=true;chunks=[];startTime=Date.now();
+ const W=1280,H=720;const speed=8;log(`Starting ${speed}x - V9 No Stop Fix - Worker timer active!`);await requestWakeLock();
+ canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;ctx=canvas.getContext('2d',{alpha:false});
+ const cStream=canvas.captureStream(24);let mime='video/webm;codecs=vp9';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';
+ rec=new MediaRecorder(cStream,{mimeType:mime,videoBitsPerSecond:1400000});rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+ rec.onstop=()=>{lastBlob=new Blob(chunks,{type:mime});lastBlobUrl=URL.createObjectURL(lastBlob);prev.src=lastBlobUrl;prev.muted=false;prev.play();document.getElementById('dlArea').style.display='block';merging=false;const elapsed=((Date.now()-startTime)/1000/60).toFixed(1);statusLine.textContent=`DONE! ${elapsed} mins! ${(lastBlob.size/1024/1024).toFixed(1)}MB`;bar.style.width='100%';log(`DONE! ${elapsed} mins!`);alert(`DONE BOSS! ${elapsed} mins!`); if(worker){worker.terminate();} if(wakeLock){try{wakeLock.release();}catch(e){}}};
+ rec.start(1000);
+ // Web Worker timer - hindi na-throttle pag background!
+ const workerCode=`let interval=null; self.onmessage=function(e){if(e.data==='start'){interval=setInterval(()=>{self.postMessage('tick');},42);}else if(e.data==='stop'){clearInterval(interval);}};`;
+ const blob=new Blob([workerCode],{type:'application/javascript'}); worker=new Worker(URL.createObjectURL(blob));
+ let gTime=0,idx=0;let curV=document.createElement('video');curV.muted=true;curV.playsInline=true;curV.playbackRate=speed; let isDrawing=false;
+ function drawFrame(){if(!merging)return;if(curV.paused||curV.ended||curV.readyState<2)return;const now=gTime+curV.currentTime;try{ctx.drawImage(curV,0,0,W,H);}catch(e){}ctx.fillStyle='rgba(0,0,0,0.5)';ctx.fillRect(0,0,W,50);ctx.fillRect(0,H-40,W,40);ctx.fillStyle='#FFD700';ctx.font='bold 28px Arial';ctx.fillText('BOSS KAIYAH - TOTOONG LIVE',14,32);ctx.fillStyle='#fff';ctx.font='18px Arial';ctx.fillText(`LIVE ${speed}x V9 NO STOP`,14,H-12);const prog=(now/total)*100;bar.style.width=Math.min(100,prog)+'%';const elapsed=(Date.now()-startTime)/1000;const est=total/speed;const rem=Math.max(0,est-elapsed);mergeInfo.textContent=`Merging ${idx+1}/${files.length} ${fmt(now)}/${fmt(total)} ${prog.toFixed(1)}% | ETA: ${fmt(rem)} | ${speed}x | Worker ON`;statusLine.textContent=`Merging ${idx+1}/${files.length} ${fmt(now)}/${fmt(total)} ${prog.toFixed(1)}% | Worker - Tuloy kahit Messenger!`;}
+ worker.onmessage=(e)=>{if(e.data==='tick'){drawFrame();}};
+ worker.postMessage('start');
+ async function playNext(){if(idx>=files.length){worker.postMessage('stop');rec.stop();return;}curV.src=URL.createObjectURL(files[idx]);curV.playbackRate=speed;try{await curV.play(); try{if(document.pictureInPictureEnabled){/* auto PiP optional */}}catch(e){}}catch(e){gTime+=durs[idx]||0;idx++;playNext();return;}curV.onended=()=>{gTime+=durs[idx]||curV.duration||0;idx++;playNext();};curV.onerror=()=>{gTime+=durs[idx]||0;idx++;playNext();};}playNext();
 };
-btn.onclick=async()=>{
- if(isMerging) return; if(!files.length) return alert('Pili ka files!');
- isMerging=true; btn.disabled=true; btn.textContent='⏳ TOTOONG NAGTATALI... TIIS LANG BOSS!';
- chunks=[]; bar.style.width='2%'; log('=== V32 HONEST START - Totoong tali ===');
- v.muted=true; v.playbackRate=2.5; // 2.5x para mas mabilis konti pero tunay pa rin
- v.src=URL.createObjectURL(files[0]);
- await new Promise(r=>{ v.onloadeddata=()=>r(); });
- try{ await v.play(); log('File 1 playing 2.5x'); }catch(e){ log('Play error'); isMerging=false; btn.disabled=false; return; }
- const stream=v.captureStream();
- const rec=new MediaRecorder(stream,{mimeType:'video/webm;codecs=vp9,opus',videoBitsPerSecond:3000000});
- rec.ondataavailable=e=>{ if(e.data.size>0) chunks.push(e.data); };
- rec.start(200);
- let idx=0;
- v.onended=async()=>{
-  idx++; log('Tapos file '+idx); bar.style.width=Math.round(idx/files.length*100)+'%';
-  if(idx>=files.length){
-   rec.stop();
-   rec.onstop=()=>{
-    const blob=new Blob(chunks,{type:'video/webm'});
-    lastUrl=URL.createObjectURL(blob);
-    v.src=lastUrl; v.onended=null; v.muted=false; v.playbackRate=1; v.play().catch(()=>{});
-    document.getElementById('dl').style.display='block';
-    info.textContent='DONE! TUNAY NA BUO! '+files.length+' files - Totoong tali!';
-    log('DONE! Tunay na buo: '+(blob.size/1024/1024).toFixed(1)+'MB');
-    isMerging=false; btn.disabled=false; btn.textContent='🔗 TOTOONG MERGE - HONEST TALI!';
-   }; return;
-  }
-  v.src=URL.createObjectURL(files[idx]);
-  await new Promise(r=>{ v.onloadeddata=()=>r(); });
-  v.playbackRate=2.5; v.muted=true;
-  info.textContent='Totoong tinatali '+(idx+1)+'/'+files.length+'... Tiis lang!';
-  try{ await v.play(); log('Playing file '+(idx+1)+' 2.5x'); }catch(e){ log('Error file '+(idx+1)); }
- };
-};
-document.getElementById('dl').onclick=()=>{
- const a=document.createElement('a'); a.href=lastUrl; a.download='TOTOONG_BUO_'+Date.now()+'.webm'; a.click();
-};
+document.getElementById('dlBtn').onclick=()=>{if(!lastBlobUrl)return;const a=document.createElement('a');a.href=lastBlobUrl;a.download=`BOSS_V9_TOTOONG_LIVE_${Date.now()}.webm`;document.body.appendChild(a);a.click();document.body.removeChild(a);};
+document.getElementById('prevBtn').onclick=()=>{if(files.length===0)return alert('Pili ka!');let idx=0;prev.src=URL.createObjectURL(files[0]);prev.muted=false;prev.play();prev.onended=()=>{idx++;if(idx<files.length){prev.src=URL.createObjectURL(files[idx]);prev.play();}}};
 </script></body></html>
