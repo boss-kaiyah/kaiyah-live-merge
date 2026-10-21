@@ -1,38 +1,60 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SIMPLE COMBINE LANG</title>
-<style>body{background:#000;color:#fff;font-family:Arial;padding:10px}video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px}button{background:#00FF88;color:#000;border:none;padding:16px;width:100%;border-radius:25px;font-weight:bold;font-size:16px;margin-top:10px}.small{font-size:12px;color:#aaa;text-align:center}.bar{height:16px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.fill{height:100%;width:0%;background:#00FF88}</style></head><body>
-<h3 style="color:#00FF88;text-align:center">SIMPLE COMBINE - 720p - BUO</h3>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V26 - MAY CHOICE 720P ORIGINAL</title>
+<style>body{background:#000;color:#fff;font-family:Arial;padding:12px}video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px}button{background:#00FF88;color:#000;border:none;padding:16px;width:100%;border-radius:25px;font-weight:bold;font-size:16px;margin-top:10px}.yellow{background:#FFD700}.small{font-size:12px;color:#aaa;text-align:center;margin:6px 0}.bar{height:18px;background:#222;border-radius:10px;overflow:hidden}.fill{height:100%;width:0%;background:#00FF88;transition:width .3s}#log{background:#111;color:#0f8;padding:8px;border-radius:8px;font-size:11px;max-height:120px;overflow:auto;white-space:pre-wrap;margin-top:8px}.choice{background:#1a1a1a;padding:10px;border-radius:10px;margin:8px 0}.choice label{display:block;padding:8px;background:#222;margin:4px 0;border-radius:8px}</style>
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
+<script src="https://unpkg.com/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>
+</head><body>
+<h3 style="color:#00FF88;text-align:center">V26 - MAY CHOICE - ORIGINAL / 1080to720P - BUO DOWNLOAD</h3>
 <input type="file" id="f" accept="video/*" multiple style="width:100%;background:#222;color:#fff;padding:10px;border-radius:8px">
-<div class="small" id="info">Piliin 13 files - combine lang</div>
+<div class="choice">
+<div style="color:#00FF88;font-weight:bold;text-align:center">PILIIN OUTPUT MO BOSS - PARA SA 2 HOURS MO:</div>
+<label><input type="radio" name="mode" value="original" checked> ✅ ORIGINAL QUALITY ONLY - FASTEST - COPY LANG - BUO - WALANG BAGO - 2 HOURS = 2 MINS</label>
+<label><input type="radio" name="mode" value="720"> 📉 1080p TO 720p - MAS MALIIT FILE - 720p OUTPUT - MAS MABILIS UPLOAD</label>
+<label><input type="radio" name="mode" value="keep720"> 🔒 FORCE 720p - KAHIT ANO INPUT - 720p LAHAT - PARA SURE MALIIT</label>
+</div>
 <video id="v" controls playsinline></video>
 <div class="bar"><div class="fill" id="bar"></div></div>
-<div class="small" id="stat">Ready - combine lang gagawin</div>
-<button id="go">COMBINE NA - 720P</button>
-<div id="dl" style="display:none"><button id="down" style="background:#FFD700">DOWNLOAD - BUO NA 100%</button></div>
+<div class="small" id="stat">Ready - Piliin choice sa taas - 100% lang may download</div>
+<button id="go">COMBINE - AYON SA CHOICE MO</button>
+<div id="dl" style="display:none"><div style="background:#00FF88;color:#000;padding:10px;border-radius:10px;text-align:center;font-weight:bold;margin-top:10px">✅ 100% BUO NA - COMPLETE DOWNLOAD - HINDI 4%</div><button class="yellow" id="down">💾 DOWNLOAD BUO - AYON SA CHOICE MO</button><div class="small" id="resultInfo" style="color:#00FF88"></div></div>
+<div id="log">Log: Ready - Piliin files + choice</div>
 <script>
-let files=[],durs=[],total=0,lastUrl=null;
-const v=document.getElementById('v'),bar=document.getElementById('bar'),stat=document.getElementById('stat'),info=document.getElementById('info'),dl=document.getElementById('dl');
-function fmt(s){let m=Math.floor(s/60),sc=Math.floor(s%60);return m+':'+String(sc).padStart(2,'0')}
-function getDur(f){return new Promise(r=>{let x=document.createElement('video');x.preload='metadata';x.muted=true;let d=false;let t=setTimeout(()=>{if(!d){d=true;r(0)}},3000);x.onloadedmetadata=()=>{if(!d){d=true;clearTimeout(t);r(x.duration);URL.revokeObjectURL(x.src)}};x.onerror=()=>{if(!d){d=true;clearTimeout(t);r(0)}};x.src=URL.createObjectURL(f);});}
-document.getElementById('f').onchange=async e=>{files=[...e.target.files];durs=[];total=0;for(let f of files){let d=await getDur(f);durs.push(d);total+=d}info.textContent=files.length+' files - '+fmt(total)+' total - combine lang';stat.textContent='Ready - '+fmt(total)+' - combine lang';v.src=URL.createObjectURL(files[0]);}
+let files=[],lastUrl=null,ffmpeg=null;
+const v=document.getElementById('v'),bar=document.getElementById('bar'),stat=document.getElementById('stat'),dl=document.getElementById('dl'),log=document.getElementById('log'),resultInfo=document.getElementById('resultInfo');
+function addLog(t){log.textContent+='\n'+t;log.scrollTop=log.scrollHeight}
+document.getElementById('f').onchange=e=>{files=[...e.target.files];stat.textContent='Ready - '+files.length+' files - piliin choice sa taas';if(files[0])v.src=URL.createObjectURL(files[0]);}
 document.getElementById('go').onclick=async()=>{
- if(!files.length)return alert('Pili files');
- let W=1280,H=720,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;let ctx=canvas.getContext('2d');
- let cStream=canvas.captureStream(30);let actx=new AudioContext();let dest=actx.createMediaStreamDestination();
- let rec=new MediaRecorder(new MediaStream([...cStream.getVideoTracks(),...dest.stream.getAudioTracks()]),{mimeType:'video/webm;codecs=vp8,opus',videoBitsPerSecond:2500000});
- let chunks=[];rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
- rec.onstop=()=>{let blob=new Blob(chunks,{type:'video/webm'});lastUrl=URL.createObjectURL(blob);v.src=lastUrl;dl.style.display='block';stat.textContent='100% BUO NA - '+fmt(total);bar.style.width='100%';alert('BUO NA BOSS - '+fmt(total)+' - 100%')};
- rec.start(1000);
- let g=0,i=0,cur=document.createElement('video');cur.muted=true;cur.playsInline=true;
- setInterval(()=>{if(cur.readyState>=2)ctx.drawImage(cur,0,0,W,H)},33);
- async function next(){
-  if(i>=files.length){rec.stop();return}
-  cur.src=URL.createObjectURL(files[i]);
-  try{actx.createMediaElementSource(cur).connect(dest)}catch(e){}
-  await new Promise(r=>cur.oncanplay=r);await cur.play().catch(()=>{});
-  cur.onended=()=>{g+=durs[i]||cur.duration||0;i++;next()};
-  cur.ontimeupdate=()=>{let now=g+cur.currentTime;bar.style.width=(now/total*100)+'%';stat.textContent=Math.floor(now/total*100)+'% - '+fmt(now)+'/'+fmt(total)+' - combine lang - wag pa download'};
- }
- next();
+ if(!files.length)return alert('Pili files');let mode=document.querySelector('input[name="mode"]:checked').value;
+ document.getElementById('go').disabled=true;dl.style.display='none';bar.style.width='5%';stat.textContent='⏳ Loading... mode: '+mode;addLog('Mode: '+mode+' - files: '+files.length);
+ const {FFmpeg}=FFmpegWDF;const {fetchFile,toBlobURL}=FFUtil;
+ if(!ffmpeg){ffmpeg=new FFmpeg();ffmpeg.on('log',({message})=>addLog(message));ffmpeg.on('progress',({progress})=>{let p=Math.round(progress*100);bar.style.width=p+'%';stat.textContent='⏳ '+p+'% - '+mode+' - WALANG DOWNLOAD HANGGANG 100%';});}
+ const base='https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd';
+ await ffmpeg.load({coreURL:await toBlobURL(base+'/ffmpeg-core.js','text/javascript'),wasmURL:await toBlobURL(base+'/ffmpeg-core.wasm','application/wasm')});
+ bar.style.width='15%';
+ for(let i=0;i<files.length;i++){await ffmpeg.writeFile('in'+i+'.mp4',await fetchFile(files[i]));bar.style.width=(15+i/files.length*20)+'%';}
+ let list='';for(let i=0;i<files.length;i++)list+="file 'in"+i+".mp4'\n";await ffmpeg.writeFile('list.txt',list);
+ bar.style.width='40%';
+ try{
+  if(mode==='original'){
+   addLog('ORIGINAL QUALITY - c copy - FAST - BUO - WALANG RE-ENCODE');
+   stat.textContent='⏳ ORIGINAL COPY - FAST - 2 HOURS MABILIS';
+   await ffmpeg.exec(['-f','concat','-safe','0','-i','list.txt','-c','copy','out.mp4']);
+  }else if(mode==='720'){
+   addLog('1080 TO 720p - scale 1280:720 - mas maliit');
+   stat.textContent='⏳ 1080 TO 720p - RE-ENCODE - MAS MATAGAL PERO MALIIT FILE';
+   await ffmpeg.exec(['-f','concat','-safe','0','-i','list.txt','-vf','scale=1280:720','-c:v','libx264','-preset','ultrafast','-c:a','aac','out.mp4']);
+  }else{
+   addLog('FORCE 720p - lahat 720p');
+   stat.textContent='⏳ FORCE 720p - LAHAT 720p OUTPUT';
+   await ffmpeg.exec(['-f','concat','-safe','0','-i','list.txt','-vf','scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2','-c:v','libx264','-preset','ultrafast','-c:a','aac','out.mp4']);
+  }
+ }catch(e){addLog('Error: '+e);alert('Error: '+e);document.getElementById('go').disabled=false;return;}
+ bar.style.width='95%';
+ let data=await ffmpeg.readFile('out.mp4');let blob=new Blob([data.buffer],{type:'video/mp4'});
+ lastUrl=URL.createObjectURL(blob);v.src=lastUrl;bar.style.width='100%';
+ let sizeMB=(blob.size/1024/1024).toFixed(1);
+ stat.textContent='✅ 100% BUO NA - '+mode.toUpperCase()+' - '+sizeMB+' MB - COMPLETE DOWNLOAD';resultInfo.textContent='Result: '+mode+' - '+sizeMB+' MB - BUO - HINDI 4% - DOWNLOAD NA';
+ dl.style.display='block';addLog('✅ DONE '+mode+' - '+sizeMB+' MB - BUO NA - 100% LANG MAY DOWNLOAD');alert('✅ BUO NA BOSS - '+mode+' - '+sizeMB+' MB - COMPLETE - HINDI 4% - DOWNLOAD NA');
+ document.getElementById('go').disabled=false;
 }
-document.getElementById('down').onclick=()=>{let a=document.createElement('a');a.href=lastUrl;a.download='COMBINED_'+Date.now()+'.webm';a.click()}
+document.getElementById('down').onclick=()=>{if(!lastUrl)return;let mode=document.querySelector('input[name="mode"]:checked').value;let a=document.createElement('a');a.href=lastUrl;a.download=mode.toUpperCase()+'_BUO_'+Date.now()+'.mp4';a.click()}
 </script></body></html>
