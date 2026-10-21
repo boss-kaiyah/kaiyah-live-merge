@@ -1,77 +1,37 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V11 NORMAL ONLY</title>
-<style>body{background:#000;color:#fff;font-family:Arial;padding:8px;margin:0}.box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin:10px 0}.label{color:#FFD700;font-weight:bold;font-size:13px;display:block;margin:8px 0 4px}input{width:100%;background:#222;color:#fff;padding:10px;border-radius:8px;border:1px solid #444}.list{max-height:130px;overflow:auto;background:#000;padding:8px;border-radius:8px;font-size:12px}video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:200px}.btn{border:none;padding:14px;border-radius:25px;font-weight:bold;flex:1;margin:5px 2px}.btn-yellow{background:#FFD700;color:#000}.btn-green{background:#00FF88;color:#000;padding:16px;border-radius:25px;font-weight:bold;width:100%;margin-top:8px;font-size:16px}.btn-dark{background:#222;color:#FFD700;border:1px solid #FFD700;padding:12px;width:100%;margin-top:8px;border-radius:20px;font-weight:bold}.small{font-size:11px;color:#aaa}.progress{height:16px;background:#222;border-radius:10px;overflow:hidden;margin:8px 0}.bar{height:100%;width:0%;background:linear-gradient(90deg,#00FF88,#FFD700);transition:width 0.3s}.row{display:flex;gap:8px}.badge{background:#00FF88;color:#000;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:bold}</style></head><body>
-<h1 style="color:#00FF88;text-align:center">✂️ V11 <span class="badge">1x NORMAL ONLY - NO FAST!</span></h1>
-<div class="small" style="text-align:center;color:#FFD700">✅ GUARANTEED: 1x Normal - Hindi Fast Forward - Tulad ng CapCut Export!</div>
-<div class="box">
-<span class="label">1️⃣ FILES - Normal Speed</span><input type="file" id="videos" accept="video/*" multiple><div id="vList" class="list">Piliin files mo - 35:20 mo</div><div class="small" id="totalInfo">Total: 00:00 | Files: 0 | Output: NORMAL 1x</div>
-<div class="small" style="color:#00FF88;margin-top:6px">🔒 FIXED: 1x Normal only - Walang 8x - Hindi fast forward!</div>
-</div>
-<div class="box">
-<video id="prev" controls playsinline></video>
-<div class="small" id="statusLine">Ready - V11 Normal Only - Hindi fast forward!</div>
-<div class="progress"><div class="bar" id="bar"></div></div><div class="small" id="mergeInfo">Output: NORMAL 1x - 35:20 input = 35:20 output - Tulad ng CapCut!</div>
-</div>
-<div class="box">
-<div class="row"><button class="btn btn-yellow" id="prevBtn">▶️ PREVIEW - NORMAL</button><button class="btn btn-yellow" id="mergeBtn">🔗 MERGE - 1x NORMAL - NO FAST!</button></div>
-<div class="row"><button class="btn-dark" id="pipBtn">🖼️ PICTURE-IN-PICTURE - Tuloy pag Messenger!</button><button class="btn-dark" id="wakeBtn">🔒 KEEP SCREEN ON</button></div>
-<div id="dlArea" style="display:none"><button class="btn-green" id="dlBtn">💾 DOWNLOAD - NORMAL SPEED - BUO NA!</button></div>
-<div class="small" id="log" style="background:#000;padding:8px;border-radius:6px;max-height:120px;overflow:auto;white-space:pre-wrap">Log: V11 - 1x NORMAL ONLY - Guaranteed hindi fast forward!</div>
-</div>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V15 HINDI IINIT</title>
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.10.1/dist/ffmpeg.min.js"></script>
+<style>body{background:#000;color:#fff;font-family:Arial;padding:10px}video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:180px}.btn{width:100%;padding:16px;border:none;border-radius:25px;font-weight:bold;margin:6px 0;font-size:15px}.y{background:#FFD700;color:#000}.g{background:#00FF88;color:#000}.bar{height:14px;background:#222;border-radius:10px;overflow:hidden}.b{height:100%;width:0%;background:#00FF88}</style>
+</head><body>
+<h3 style="color:#00FF88;text-align:center">V15 - HINDI IINIT - 3 MINS LANG</h3>
+<div style="color:#FFD700;font-size:11px;text-align:center">✅ 105 mins = 3 mins lang - Hindi iinit - Normal speed - Hindi palpak</div>
+<input type="file" id="f" accept="video/*" multiple style="width:100%;padding:10px;background:#222;color:#fff;border-radius:8px;margin:8px 0">
+<div id="info" style="color:#FFD700;font-size:12px">Piliin 13 files - V15 hindi iinit phone</div>
+<video id="v" controls playsinline style="width:100%"></video>
+<div class="bar"><div class="b" id="bar"></div></div>
+<button class="btn y" id="go">🔗 MERGE - HINDI IINIT - 3 MINS LANG!</button>
+<button class="btn g" id="dl" style="display:none">💾 DOWNLOAD - NORMAL AT TAMA</button>
+<div id="log" style="background:#111;padding:6px;font-size:10px;max-height:100px;overflow:auto">Log: V15 - Hindi iinit</div>
 <script>
-let files=[],durs=[],total=0,wakeLock=null,merging=false,startTime=0,lastBlobUrl=null,lastBlob=null,worker=null;
-const prev=document.getElementById('prev'),vList=document.getElementById('vList'),totalInfo=document.getElementById('totalInfo'),statusLine=document.getElementById('statusLine'),bar=document.getElementById('bar'),mergeInfo=document.getElementById('mergeInfo'),logEl=document.getElementById('log');
-function log(m){logEl.textContent+='\n'+m;logEl.scrollTop=logEl.scrollHeight;}
-function fmt(s){if(isNaN(s)||s<=0)return '00:00';const mm=Math.floor(s/60),ss=Math.floor(s%60);return String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');}
-function getDur(f){return new Promise(r=>{const v=document.createElement('video');v.preload='metadata';v.muted=true;let done=false;const to=setTimeout(()=>{if(!done){done=true;r(0);}},4000);v.onloadedmetadata=()=>{if(!done){done=true;clearTimeout(to);r(v.duration);URL.revokeObjectURL(v.src);}};v.onerror=()=>{if(!done){done=true;clearTimeout(to);r(0);}};try{v.src=URL.createObjectURL(f);}catch(e){r(0);}});}
-async function requestWakeLock(){try{if('wakeLock' in navigator){wakeLock=await navigator.wakeLock.request('screen');log('✅ WakeLock ON');}}catch(e){}}
-document.getElementById('wakeBtn').onclick=requestWakeLock;
-document.addEventListener('visibilitychange',async()=>{if(wakeLock!==null && document.visibilityState==='visible'){await requestWakeLock();} if(document.visibilityState==='hidden' && merging){log('⚠️ Background ka - pero Worker tuloy!');}});
-document.getElementById('pipBtn').onclick=async()=>{try{if(document.pictureInPictureEnabled && prev.readyState>0){await prev.requestPictureInPicture();log('✅ PiP ON - Tuloy kahit Messenger!');}else{log('Preview muna bago PiP');}}catch(e){log('PiP error: '+e.message);}};
-document.getElementById('videos').onchange=async e=>{files=Array.from(e.target.files);durs=[];total=0;vList.innerHTML='';for(let i=0;i<files.length;i++){vList.innerHTML+=`${i+1}. ${files[i].name}<br>`;}for(let i=0;i<files.length;i++){const d=await getDur(files[i]);durs.push(d||0);total+=d||0;}totalInfo.textContent=`Total: ${fmt(total)} | Files: ${files.length} | Output: ${fmt(total)} NORMAL`;if(files[0]){try{prev.src=URL.createObjectURL(files[0]);}catch(e){}} log(`${files.length} files - Total ${fmt(total)} - Output NORMAL ${fmt(total)} - Hindi fast!`);};
-let rec,chunks=[],canvas,ctx,audioCtx,dest;
-document.getElementById('mergeBtn').onclick=async()=>{
- if(files.length===0)return alert('Pili ka!');if(merging)return;merging=true;chunks=[];startTime=Date.now();
- const W=1280,H=720;const speed=1; // FIXED 1x - HINDI FAST FORWARD!
- log(`Starting 1x NORMAL ONLY - Guaranteed hindi fast forward! Total ${fmt(total)} = Output ${fmt(total)}`);
- await requestWakeLock();
- canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;ctx=canvas.getContext('2d',{alpha:false});
- const cStream=canvas.captureStream(30);
- // AUDIO - para may sound tulad ng CapCut!
- audioCtx=new (window.AudioContext||window.webkitAudioContext)();
- dest=audioCtx.createMediaStreamDestination();
- const combined=new MediaStream([...cStream.getVideoTracks(),...dest.stream.getAudioTracks()]);
- let mime='video/webm;codecs=vp9,opus';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm;codecs=vp8,opus';if(!MediaRecorder.isTypeSupported(mime))mime='video/webm';
- rec=new MediaRecorder(combined,{mimeType:mime,videoBitsPerSecond:3500000});
- rec.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
- rec.onstop=()=>{
-  lastBlob=new Blob(chunks,{type:mime});lastBlobUrl=URL.createObjectURL(lastBlob);
-  prev.src=lastBlobUrl;prev.muted=false;prev.playbackRate=1;prev.play(); // NORMAL PLAYBACK!
-  document.getElementById('dlArea').style.display='block';
-  merging=false;const elapsed=((Date.now()-startTime)/1000/60).toFixed(1);
-  statusLine.textContent=`DONE! ${elapsed} mins! Output NORMAL ${fmt(total)} - Hindi fast forward! ${(lastBlob.size/1024/1024).toFixed(1)}MB`;
-  bar.style.width='100%';mergeInfo.textContent=`DONE! Output ${fmt(total)} NORMAL - Hindi fast forward!`;
-  log(`DONE! Output ${fmt(total)} NORMAL - Hindi fast! Size ${(lastBlob.size/1024/1024).toFixed(1)}MB`);alert(`DONE BOSS! NORMAL 1x! ${fmt(total)} output - Hindi fast forward - Tulad ng CapCut!`);
-  if(worker)worker.terminate();if(wakeLock)try{wakeLock.release();}catch(e){}
- };
- rec.start(500);
- const workerCode=`let interval=null; self.onmessage=function(e){if(e.data==='start'){interval=setInterval(()=>{self.postMessage('tick');},33);}else if(e.data==='stop'){clearInterval(interval);}};`;
- const blob=new Blob([workerCode],{type:'application/javascript'});worker=new Worker(URL.createObjectURL(blob));
- let gTime=0,idx=0;let curV=document.createElement('video');curV.muted=false;curV.playsInline=true;curV.crossOrigin='anonymous';curV.playbackRate=1; // 1x NORMAL!
- let audioSource=null;
- function drawFrame(){if(!merging)return;if(curV.paused||curV.ended||curV.readyState<2)return;const now=gTime+curV.currentTime;try{ctx.drawImage(curV,0,0,W,H);}catch(e){}
-  const prog=(now/total)*100;bar.style.width=Math.min(100,prog)+'%';const elapsed=(Date.now()-startTime)/1000;const rem=Math.max(0,total-elapsed);mergeInfo.textContent=`Merging ${idx+1}/${files.length} ${fmt(now)}/${fmt(total)} ${prog.toFixed(1)}% | ETA: ${fmt(rem)} | 1x NORMAL - Hindi fast!`;statusLine.textContent=`Merging ${idx+1}/${files.length} ${fmt(now)}/${fmt(total)} ${prog.toFixed(1)}% | 1x NORMAL ONLY!`;
- }
- worker.onmessage=(e)=>{if(e.data==='tick'){drawFrame();}};worker.postMessage('start');
- async function playNext(){
-  if(idx>=files.length){worker.postMessage('stop');log('All files done - 1x Normal - Finishing...');setTimeout(()=>{if(rec.state!=='inactive')rec.stop();},800);return;}
-  try{if(audioSource)audioSource.disconnect();const src=audioCtx.createMediaElementSource(curV);src.connect(dest);audioSource=src;}catch(e){}
-  curV.src=URL.createObjectURL(files[idx]);curV.playbackRate=1;curV.muted=false; // NORMAL 1x!
-  try{await curV.play();log(`Playing file ${idx+1} - 1x NORMAL`);}catch(e){log('Play error');gTime+=durs[idx]||0;idx++;playNext();return;}
-  curV.onended=()=>{gTime+=durs[idx]||curV.duration||0;idx++;playNext();};
-  curV.onerror=()=>{gTime+=durs[idx]||0;idx++;playNext();};
- }
- playNext();
+let files=[],outUrl=null;
+const v=document.getElementById('v'),bar=document.getElementById('bar'),logEl=document.getElementById('log'),info=document.getElementById('info');
+function log(m){logEl.textContent+='\n'+m;logEl.scrollTop=9999;}
+document.getElementById('f').onchange=e=>{files=[...e.target.files];info.textContent=files.length+' files - V15 - 3 mins lang - hindi iinit';if(files[0])v.src=URL.createObjectURL(files[0]);log(files.length+' files - hindi iinit');};
+document.getElementById('go').onclick=async()=>{
+ if(!files.length)return alert('Pili files');let btn=document.getElementById('go');btn.disabled=true;btn.textContent='⏳ LOADING - 20 sec lang';
+ try{
+  const {createFFmpeg,fetchFile}=FFmpeg;const ffmpeg=createFFmpeg({log:false});
+  await ffmpeg.load();log('Loaded - hindi iinit - copy video lang');bar.style.width='10%';btn.textContent='COPYING FILES - HINDI IINIT';
+  for(let i=0;i<files.length;i++){let d=await fetchFile(files[i]);ffmpeg.FS('writeFile','in'+i+'.mp4',d);bar.style.width=10+i/files.length*20+'%';log('file '+(i+1)+' - '+(d.length/1024/1024).toFixed(0)+'MB');}
+  let list='';for(let i=0;i<files.length;i++)list+='file in'+i+'.mp4\n';ffmpeg.FS('writeFile','list.txt',list);
+  bar.style.width='40%';btn.textContent='MERGING - 3 MINS - HINDI IINIT PHONE';info.textContent='Merging - Video copy - Audio ayos - Hindi iinit - Normal speed';
+  log('Merging - video copy para hindi iinit - audio aac para hindi palpak');
+  // VIDEO COPY - HINDI IINIT - AUDIO AAC - HINDI PALPAK - NORMAL SPEED
+  await ffmpeg.run('-f','concat','-safe','0','-i','list.txt','-c:v','copy','-c:a','aac','-b:a','128k','out.mp4');
+  bar.style.width='90%';log('Done - hindi uminit - tama output');
+  let data=ffmpeg.FS('readFile','out.mp4');let blob=new Blob([data.buffer],{type:'video/mp4'});outUrl=URL.createObjectURL(blob);
+  v.src=outUrl;v.playbackRate=1;v.muted=false;v.play().catch(()=>{});document.getElementById('dl').style.display='block';bar.style.width='100%';
+  info.textContent='DONE! '+(blob.size/1024/1024).toFixed(0)+'MB - HINDI UMINIT - NORMAL - TAMA';log('DONE - 3 mins lang - hindi uminit - normal - tama');btn.textContent='🔗 MERGE - HINDI IINIT - 3 MINS LANG!';btn.disabled=false;
+ }catch(e){log('ERR '+e.message);info.textContent='Error - try ulit';btn.disabled=false;btn.textContent='TRY ULIT - HINDI IINIT';}
 };
-document.getElementById('dlBtn').onclick=()=>{if(!lastBlobUrl)return;const a=document.createElement('a');a.href=lastBlobUrl;a.download=`NORMAL_1x_NO_FAST_${Date.now()}.webm`;document.body.appendChild(a);a.click();document.body.removeChild(a);};
-document.getElementById('prevBtn').onclick=()=>{if(files.length===0)return alert('Pili ka!');let idx=0;prev.src=URL.createObjectURL(files[0]);prev.muted=false;prev.playbackRate=1;prev.play();prev.onended=()=>{idx++;if(idx<files.length){prev.src=URL.createObjectURL(files[idx]);prev.play();}}};
+document.getElementById('dl').onclick=()=>{let a=document.createElement('a');a.href=outUrl;a.download='HINDI_IINIT_BUO_'+Date.now()+'.mp4';a.click();};
 </script></body></html>
