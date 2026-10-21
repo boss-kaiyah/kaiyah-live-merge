@@ -1,37 +1,37 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V15 HINDI IINIT</title>
-<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.10.1/dist/ffmpeg.min.js"></script>
-<style>body{background:#000;color:#fff;font-family:Arial;padding:10px}video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:180px}.btn{width:100%;padding:16px;border:none;border-radius:25px;font-weight:bold;margin:6px 0;font-size:15px}.y{background:#FFD700;color:#000}.g{background:#00FF88;color:#000}.bar{height:14px;background:#222;border-radius:10px;overflow:hidden}.b{height:100%;width:0%;background:#00FF88}</style>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V16 FIX SHARED</title>
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<style>body{background:#000;color:#fff;font-family:Arial;padding:10px}video{width:100%;background:#000;border:2px solid #00FF88;border-radius:10px;min-height:180px}.btn{width:100%;padding:16px;border:none;border-radius:25px;font-weight:bold;margin:6px 0}.y{background:#FFD700;color:#000}.g{background:#00FF88;color:#000}.bar{height:14px;background:#222;border-radius:10px;overflow:hidden}.b{height:100%;width:0%;background:#00FF88}</style>
 </head><body>
-<h3 style="color:#00FF88;text-align:center">V15 - HINDI IINIT - 3 MINS LANG</h3>
-<div style="color:#FFD700;font-size:11px;text-align:center">✅ 105 mins = 3 mins lang - Hindi iinit - Normal speed - Hindi palpak</div>
+<h3 style="color:#00FF88;text-align:center">V16 - FIX - GAGANA NA SA GITHUB</h3>
+<div style="color:#00FF88;font-size:11px;text-align:center">✅ Fix SharedArrayBuffer - Single Thread - Gagana sa github.io</div>
 <input type="file" id="f" accept="video/*" multiple style="width:100%;padding:10px;background:#222;color:#fff;border-radius:8px;margin:8px 0">
-<div id="info" style="color:#FFD700;font-size:12px">Piliin 13 files - V15 hindi iinit phone</div>
+<div id="info" style="color:#FFD700;font-size:12px">V16 - Fix error mo - Single thread - 3 mins</div>
 <video id="v" controls playsinline style="width:100%"></video>
 <div class="bar"><div class="b" id="bar"></div></div>
-<button class="btn y" id="go">🔗 MERGE - HINDI IINIT - 3 MINS LANG!</button>
-<button class="btn g" id="dl" style="display:none">💾 DOWNLOAD - NORMAL AT TAMA</button>
-<div id="log" style="background:#111;padding:6px;font-size:10px;max-height:100px;overflow:auto">Log: V15 - Hindi iinit</div>
+<button class="btn y" id="go">🔗 MERGE - FIX NA - GAGANA NA!</button>
+<button class="btn g" id="dl" style="display:none">💾 DOWNLOAD - BUO AT TAMA</button>
+<div id="log" style="background:#111;padding:6px;font-size:10px;max-height:120px;overflow:auto">Log: V16 - Fix SharedArrayBuffer</div>
 <script>
 let files=[],outUrl=null;
 const v=document.getElementById('v'),bar=document.getElementById('bar'),logEl=document.getElementById('log'),info=document.getElementById('info');
 function log(m){logEl.textContent+='\n'+m;logEl.scrollTop=9999;}
-document.getElementById('f').onchange=e=>{files=[...e.target.files];info.textContent=files.length+' files - V15 - 3 mins lang - hindi iinit';if(files[0])v.src=URL.createObjectURL(files[0]);log(files.length+' files - hindi iinit');};
+document.getElementById('f').onchange=e=>{files=[...e.target.files];info.textContent=files.length+' files - V16 fix - gagana na';if(files[0])v.src=URL.createObjectURL(files[0]);log(files.length+' files - fix mode');};
 document.getElementById('go').onclick=async()=>{
- if(!files.length)return alert('Pili files');let btn=document.getElementById('go');btn.disabled=true;btn.textContent='⏳ LOADING - 20 sec lang';
+ if(!files.length)return alert('Pili files');let btn=document.getElementById('go');btn.disabled=true;btn.textContent='⏳ LOADING FIX... 20 sec';
  try{
-  const {createFFmpeg,fetchFile}=FFmpeg;const ffmpeg=createFFmpeg({log:false});
-  await ffmpeg.load();log('Loaded - hindi iinit - copy video lang');bar.style.width='10%';btn.textContent='COPYING FILES - HINDI IINIT';
-  for(let i=0;i<files.length;i++){let d=await fetchFile(files[i]);ffmpeg.FS('writeFile','in'+i+'.mp4',d);bar.style.width=10+i/files.length*20+'%';log('file '+(i+1)+' - '+(d.length/1024/1024).toFixed(0)+'MB');}
+  const {createFFmpeg,fetchFile}=FFmpeg;
+  // FIX: SINGLE THREAD CORE - HINDI KAILANGAN SharedArrayBuffer - GAGANA SA GITHUB!
+  const ffmpeg=createFFmpeg({log:true,corePath:'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',mainName:'main',logger:({message})=>log(message)});
+  await ffmpeg.load();log('FFmpeg FIX loaded - Single Thread - Gagana sa GitHub!');bar.style.width='15%';btn.textContent='COPYING FILES...';
+  for(let i=0;i<files.length;i++){let d=await fetchFile(files[i]);ffmpeg.FS('writeFile','in'+i+'.mp4',d);bar.style.width=15+i/files.length*25+'%';log('file '+(i+1)+' ok');}
   let list='';for(let i=0;i<files.length;i++)list+='file in'+i+'.mp4\n';ffmpeg.FS('writeFile','list.txt',list);
-  bar.style.width='40%';btn.textContent='MERGING - 3 MINS - HINDI IINIT PHONE';info.textContent='Merging - Video copy - Audio ayos - Hindi iinit - Normal speed';
-  log('Merging - video copy para hindi iinit - audio aac para hindi palpak');
-  // VIDEO COPY - HINDI IINIT - AUDIO AAC - HINDI PALPAK - NORMAL SPEED
+  bar.style.width='50%';btn.textContent='MERGING - FIX - 3 MINS - NORMAL';info.textContent='Merging - Fix - Normal speed - Hindi iinit - Tama output';
+  log('Merging - video copy + aac - fix mode - normal speed');
   await ffmpeg.run('-f','concat','-safe','0','-i','list.txt','-c:v','copy','-c:a','aac','-b:a','128k','out.mp4');
-  bar.style.width='90%';log('Done - hindi uminit - tama output');
-  let data=ffmpeg.FS('readFile','out.mp4');let blob=new Blob([data.buffer],{type:'video/mp4'});outUrl=URL.createObjectURL(blob);
-  v.src=outUrl;v.playbackRate=1;v.muted=false;v.play().catch(()=>{});document.getElementById('dl').style.display='block';bar.style.width='100%';
-  info.textContent='DONE! '+(blob.size/1024/1024).toFixed(0)+'MB - HINDI UMINIT - NORMAL - TAMA';log('DONE - 3 mins lang - hindi uminit - normal - tama');btn.textContent='🔗 MERGE - HINDI IINIT - 3 MINS LANG!';btn.disabled=false;
- }catch(e){log('ERR '+e.message);info.textContent='Error - try ulit';btn.disabled=false;btn.textContent='TRY ULIT - HINDI IINIT';}
+  bar.style.width='90%';let data=ffmpeg.FS('readFile','out.mp4');let blob=new Blob([data.buffer],{type:'video/mp4'});outUrl=URL.createObjectURL(blob);
+  v.src=outUrl;v.playbackRate=1;v.play();document.getElementById('dl').style.display='block';bar.style.width='100%';
+  info.textContent='DONE! '+(blob.size/1024/1024).toFixed(0)+'MB - FIX - NORMAL - TAMA';log('DONE - Fix works! Normal speed - Tama');btn.textContent='🔗 MERGE - FIX NA - GAGANA NA!';btn.disabled=false;
+ }catch(e){log('ERR '+e.message);info.textContent='Error: '+e.message+' - try ulit';btn.disabled=false;btn.textContent='TRY ULIT - FIX NA';}
 };
-document.getElementById('dl').onclick=()=>{let a=document.createElement('a');a.href=outUrl;a.download='HINDI_IINIT_BUO_'+Date.now()+'.mp4';a.click();};
+document.getElementById('dl').onclick=()=>{let a=document.createElement('a');a.href=outUrl;a.download='FIX_BUO_'+Date.now()+'.mp4';a.click();};
 </script></body></html>
